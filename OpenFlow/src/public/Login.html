@@ -1,25 +1,35 @@
-<div class="starter-template" ng-show="ctrl.scanning==false">
+<div class="starter-template login-body-bg" ng-show="ctrl.scanning==false">
   <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto rel-posi">
+      <div class="login-logo">
+        <img class="login-logo-img" src="images/open_flow128.png" />
+      </div>
       <div class="card card-signin my-5">
-        <div class="card-body">
-          <h5 class="card-title text-center"><span translate lib="web">signin</span> {{ctrl.domain}}</h5>
+        <div class="card-body p-4 pt-5">
+          <h5 class="card-title sign-title text-center mt-5"><span translate lib="web">signin</span> {{ctrl.domain}}</h5>
           </h5>
-          <form class="form-signin" ngNoForm method='post' action='/local'>
-            <div class="form-label-group" ng-show="ctrl.localenabled">
+          <form class="form-signin p-3 login-form" ngNoForm method='post' action='/local'>
+            <div class="form-label-group rel-posi" ng-show="ctrl.localenabled">
+                <label class="sign-label"  for="username" translate lib="web">email</label>
               <input type="text" name="username" ng-model="ctrl.username" class="form-control" placeholder="email"
                 required autofocus autocomplete='off'>
-              <label for="username" translate lib="web">email</label>
+                <span class="symbol-input100 top43px">
+                  <i class="far fa-user"></i>
+                </span>
             </div>
-            <div class="form-label-group" ng-show="ctrl.localenabled">
+            <div class="form-label-group pt-4 rel-posi" ng-show="ctrl.localenabled">
+                <label class="sign-label" for="password" translate lib="web">password</label>
               <input type="password" name="password" ng-model="ctrl.password" class="form-control"
-                placeholder="Password" required>
-              <label for="password" translate lib="web">password</label>
+                placeholder="Password"  required>
+                <span class="symbol-input100">
+                  <i class="fas fa-lock"></i>
+                </span>
+
             </div>
             <div class="mb-3">
               <label class="text-danger" translate lib="web" ng-model="ctrl.message"></label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" ng-show="ctrl.localenabled"
+            <button class="btn btn-lg btn-primary btn-block text-uppercase sign-btn" type="submit" ng-show="ctrl.localenabled"
               translate lib="web">signin</button>
             <hr class="my-4" ng-show="ctrl.localenabled">
 
@@ -30,7 +40,18 @@
             <a href ng-click="ctrl.Scan()" ng-show="ctrl.qrcodescan" class="btn btn-lg btn-block text-uppercase">
               <i class="fas fa-qrcode mr-2"></i><span translate lib="web">QRCode Scan</span>
             </a>
-            <div class="card-body" ng-show="ctrl.allow_user_registration==true">
+            <div class="card-body pt-0" ng-show="ctrl.allow_user_registration==true">
+                <div class="pb-2">
+                    <a href="#" class="btn-face m-b-10  pull-left">
+                        <img class="provider-img " src="images/facebook.svg" >
+                        <span class="facebook-choice">Facebook</span>
+                    </a>
+                    <a href="#" class="btn-google m-b-10  pull-right">
+                        <img class="provider-img" src="images/icon-google.png" >
+                        <span class="google-choice">Google</span>
+                    </a>
+                    <div class="clearfix"></div>
+                </div>
               <small><i>
                   Select a provider or login using a local username and password.
                   A new user will automaticly be created if username is unknown.
