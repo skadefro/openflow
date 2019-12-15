@@ -33,15 +33,21 @@
               translate lib="web">signin</button>
             <hr class="my-4" ng-show="ctrl.localenabled">
 
-            <a ng-href="/{{model.id}}" ng-repeat="model in ctrl.providers" class="btn btn-lg btn-block text-uppercase">
-              <i class="fab {{model.logo}} mr-2"></i><span translate lib="web">{{model.name}}</span>
-            </a>
 
-            <a href ng-click="ctrl.Scan()" ng-show="ctrl.qrcodescan" class="btn btn-lg btn-block text-uppercase">
-              <i class="fas fa-qrcode mr-2"></i><span translate lib="web">QRCode Scan</span>
-            </a>
+<div class="all-providers-block">
+  
+  <a ng-href="/{{model.id}}" ng-repeat="model in ctrl.providers" class="btn btn-lg text-uppercase btn-google m-b-10 mr-3  pull-left mb-3">
+    <i class="fab {{model.logo}} mr-2"></i><span translate lib="web">{{model.name}}</span>
+  </a>
+
+  <a  href ng-click="ctrl.Scan()" ng-show="ctrl.qrcodescan || !ctrl.qrcodescan" class="btn btn-lg  text-uppercase btn-google m-b-10  pull-left mb-3">
+    <i class="fas fa-qrcode mr-2"></i><span translate lib="web">QRCode Scan</span>
+  </a>
+  <div class="clearfix"></div>
+</div>
+
             <div class="card-body pt-0" ng-show="ctrl.allow_user_registration==true">
-                <div class="pb-2">
+                <!-- <div class="pb-2">
                     <a href="#" class="btn-face m-b-10  pull-left">
                         <img class="provider-img " src="images/facebook.svg" >
                         <span class="facebook-choice">Facebook</span>
@@ -51,7 +57,7 @@
                         <span class="google-choice">Google</span>
                     </a>
                     <div class="clearfix"></div>
-                </div>
+                </div> -->
               <small><i>
                   Select a provider or login using a local username and password.
                   A new user will automaticly be created if username is unknown.
