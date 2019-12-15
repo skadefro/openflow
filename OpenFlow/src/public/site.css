@@ -328,9 +328,9 @@ a:hover{
 }
 .login-logo{
   position: absolute;
-  top: -15px;
+  top: 0px;
   z-index: 99;
-  left: 38%;
+  left: 40%;
   background-color: #fff;
   -webkit-box-shadow: 0px 1px 5px 3px rgba(0,94,122,1);
   -moz-box-shadow: 0px 1px 5px 3px rgba(0,94,122,1);
@@ -339,7 +339,7 @@ a:hover{
     border-radius: 63px;
 }
 .login-logo-img{
-  width: 85px;
+  width: 60px;
 }
 .sign-title{
   font-size: 20px;

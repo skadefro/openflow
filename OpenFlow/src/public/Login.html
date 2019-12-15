@@ -1,14 +1,14 @@
 <div class="starter-template login-body-bg" ng-show="ctrl.scanning==false">
   <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto rel-posi">
+    <div class="col-sm-9 col-md-7 col-lg-6 mx-auto rel-posi">
       <div class="login-logo">
         <img class="login-logo-img" src="images/open_flow128.png" />
       </div>
       <div class="card card-signin my-5">
-        <div class="card-body p-4 pt-5">
+        <div class="card-body  pb-0">
           <h5 class="card-title sign-title text-center mt-5"><span translate lib="web">signin</span> {{ctrl.domain}}</h5>
           </h5>
-          <form class="form-signin p-3 login-form" ngNoForm method='post' action='/local'>
+          <form class="form-signin p-3 login-form pt-0 pb-0" ngNoForm method='post' action='/local'>
             <div class="form-label-group rel-posi" ng-show="ctrl.localenabled">
                 <label class="sign-label"  for="username" translate lib="web">email</label>
               <input type="text" name="username" ng-model="ctrl.username" class="form-control" placeholder="email"
@@ -31,7 +31,7 @@
             </div>
             <button class="btn btn-lg btn-primary btn-block text-uppercase sign-btn" type="submit" ng-show="ctrl.localenabled"
               translate lib="web">signin</button>
-            <hr class="my-4" ng-show="ctrl.localenabled">
+            <hr class="" ng-show="ctrl.localenabled">
 
 
 <div class="all-providers-block">
@@ -46,7 +46,7 @@
   <div class="clearfix"></div>
 </div>
 
-            <div class="card-body pt-0" ng-show="ctrl.allow_user_registration==true">
+            <div class="card-body pt-0 " ng-show="ctrl.allow_user_registration==true">
                 <!-- <div class="pb-2">
                     <a href="#" class="btn-face m-b-10  pull-left">
                         <img class="provider-img " src="images/facebook.svg" >
