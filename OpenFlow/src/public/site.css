@@ -396,10 +396,11 @@ a:hover{
 }
 @media (max-width:399px)  {
   .btn-google, .qr-code{
-    width: 100%;
+    width: calc((100% - 22px) /2);
+    margin-right: 6px !important;
   }
   .all-providers-block{
-    padding: 0px;
+    padding-left: 10px;
   }
   .login-logo{
     left: 35%;
@@ -407,6 +408,23 @@ a:hover{
   .login-logo-img{
     width: 50px;
   }
+  .btn-google span, .qr-code span{
+    font-size: 10px;
+  }
+  .login-form hr{
+    display: none;
+  }
+  .sign-title{
+    font-size: 14px;
+    margin-bottom: 0px;
+    margin-top: 32px !important;
+  }
+  .card-body.pt-0.last-text{
+    padding: 0px;
+  }
+  .last-text small {
+    font-size: 80%;
+    font-weight: 400;
 }
 
 /*--------------------------------------- Nav-bar ------------------------------------*/
