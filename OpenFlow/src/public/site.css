@@ -8,6 +8,7 @@
 body{
   font-family: Raleway-Regular !important;
   min-height: 100vh;
+  padding-top:25px;
 }
 
 .jsondiffpatch-annotated-delta {
@@ -257,11 +258,15 @@ textarea{
 .top40px{
   top: 40px;
 }
+.padd15{
+  padding: 15px;
+}
+.marg-0-auto{
+  margin: 0 auto;
+}
 
 
-
-
-
+/*********************LogIn page***********************/
 .symbol-input100{
   position: absolute;
   top: 65px;
@@ -290,7 +295,28 @@ textarea{
 box-shadow: 0px 1px 5px 3px rgba(0, 94, 122, 0.48)
 }
 
-.btn-face, .btn-google {
+.btn-google {
+  font-family: Raleway-Regular;
+  font-size: 16px;
+  line-height: 1.2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc((100% - 48px) / 3);
+  height: 40px;
+  border-radius: 3px;
+  border: 1px solid #e6e6e6;
+  background-color: #fff;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.qr-code{
   font-family: Raleway-Regular;
   font-size: 16px;
   line-height: 1.2;
@@ -330,7 +356,7 @@ a:hover{
   position: absolute;
   top: 0px;
   z-index: 99;
-  left: 40%;
+  left: 41%;
   background-color: #fff;
   -webkit-box-shadow: 0px 1px 5px 3px rgba(0,94,122,1);
   -moz-box-shadow: 0px 1px 5px 3px rgba(0,94,122,1);
@@ -350,10 +376,59 @@ a:hover{
   color: #73777b;
   font-weight: bold;
 }
-.btn-google span{
+.btn-google span, .qr-code span{
   font-size: 13px;
   font-weight: bold;
 }
 .all-providers-block{
   padding: 10px 0px 0px 25px;
+}
+.headerbg{
+  background-color: #006d82;
+}
+@media (max-width:770px) and (min-width:400px) {
+  .btn-google{
+    width: calc((100% - 34px) /2);
+  }
+  .login-logo{
+    left: 40%;
+  }
+}
+@media (max-width:399px)  {
+  .btn-google, .qr-code{
+    width: 100%;
+  }
+  .all-providers-block{
+    padding: 0px;
+  }
+  .login-logo{
+    left: 35%;
+  }
+  .login-logo-img{
+    width: 50px;
+  }
+}
+
+/*--------------------------------------- Nav-bar ------------------------------------*/
+.signout-btn, .signout-btn:hover, .signout-btn:focus, .signout-btn:active, .signout-btn:visited{
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: transparent;
+}
+.navbar-dark .navbar-nav .nav-link{
+  color: #fff;
+}
+.navbar-dark .navbar-nav .active>.nav-link{
+  font-weight: bold;
+}
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover{
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+.logo-width{
+  width: 35px;
+}
+.headerbg .nav-link{
+  padding: 6px 17px !important;
 }
