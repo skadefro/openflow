@@ -301,7 +301,7 @@ box-shadow: 0px 1px 5px 3px rgba(0, 94, 122, 0.48)
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc((100% - 10px) / 2);
+  width: calc((100% - 36px) / 2);
   height: 40px;
   border-radius: 3px;
   border: 1px solid #e6e6e6;
@@ -349,4 +349,11 @@ a:hover{
 .sign-label{
   color: #73777b;
   font-weight: bold;
+}
+.btn-google span{
+  font-size: 13px;
+  font-weight: bold;
+}
+.all-providers-block{
+  padding: 10px 0px 0px 25px;
 }
