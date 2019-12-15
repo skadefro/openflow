@@ -396,11 +396,11 @@ a:hover{
 }
 @media (max-width:399px)  {
   .btn-google, .qr-code{
-    width: calc((100% - 22px) /2);
+    width: calc((100% - 13px) /2);
     margin-right: 6px !important;
   }
   .all-providers-block{
-    padding-left: 10px;
+    padding-left: 5px;
   }
   .login-logo{
     left: 35%;
