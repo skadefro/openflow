@@ -361,7 +361,7 @@ a:hover{
   -webkit-box-shadow: 0px 1px 5px 3px rgba(0,94,122,1);
   -moz-box-shadow: 0px 1px 5px 3px rgba(0,94,122,1);
   box-shadow: 0px 1px 5px 3px rgba(0, 94, 122, 0.48);
-  padding: 18px;
+  padding: 15px 18px 18px 14px;
     border-radius: 63px;
 }
 .login-logo-img{
@@ -403,7 +403,7 @@ a:hover{
     padding-left: 5px;
   }
   .login-logo{
-    left: 35%;
+    left: 39%;
   }
   .login-logo-img{
     width: 50px;
