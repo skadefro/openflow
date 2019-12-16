@@ -426,6 +426,23 @@ a:hover{
     font-size: 80%;
     font-weight: 400;
 }
+.sign-label{
+  display: none;
+}
+.symbol-input100{
+  top: 33px;
+}
+.symbol-input100.top43px {
+  top: 12px;
+}
+.last-text small {
+  font-size: 75%;
+  font-weight: 400;
+}
+.special-mob.mb-4{
+  margin-bottom: 0px !important;
+}
+}
 
 /*--------------------------------------- Nav-bar ------------------------------------*/
 .signout-btn, .signout-btn:hover, .signout-btn:focus, .signout-btn:active, .signout-btn:visited{
