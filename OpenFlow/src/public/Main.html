@@ -1,13 +1,14 @@
 <div class="row pt-4 mt-4">
  <div class="pt-4 col-sm-6 ">
-  <h1 translate lib="web">sitename</h1>
+  <h3 class="page-header" translate lib="web">sitename</h3>
   <p class="col-md-5 lead"></p>
  </div>
-  <div class="form-group col-sm-3 form-horizontal">
-    <label class="sr-only">Filter</label>
+  <div class="pt-4 form-group col-sm-6 form-horizontal">
+    
     <div class="input-group unframed-addons">
-      <div class="input-group-addon"><i class="fas fa-search"></i></div>
-      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md"
+      <label class="sr-only">Filter</label>
+      <div  class="input-group-addon flow-search "><i class="fas fa-search"></i></div>
+      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md rel-posi search-input"
         ng-model-options="{debounce: 400}" />
     </div>
   </div>

@@ -467,3 +467,32 @@ a:hover{
 .headerbg .nav-link{
   padding: 6px 17px !important;
 }
+/*----------------------------Openflow------------------------------*/
+.flow-search{
+  position: absolute;
+  z-index: 99;
+  top: 12px;
+  left: 10px;
+}
+.search-input{
+  padding-left: 35px;
+    font-size: 16px;
+    color: #7e7e7e;
+    font-weight: bold;
+}
+.page-header{
+  font-weight: bold;
+  color: #006d82;
+}
+.table.table-striped .thead-dark th{
+    background-color: #00576f;
+    border-color: #00576f;
+}
+.az-edit{
+  color: #3b6da2;
+  font-size: 18px;
+}
+.az-trash{
+  color: #ff0000;
+  font-size: 20px;
+}
