@@ -611,7 +611,9 @@ export class Message {
                     cli._logger.debug(tuser.username + " was validated in using " + type);
                     // cli.jwt = Crypt.createToken(cli.user, "5m");
                 }
-                user.lastseen = new Date(new Date().toISOString());
+                if (msg.impersonate === undefined || msg.impersonate === null && msg.impersonate === "") {
+                    user.lastseen = new Date(new Date().toISOString());
+                }
                 await user.Save(TokenUser.rootToken());
             }
         } catch (error) {
@@ -735,6 +737,7 @@ export class Message {
                                         env: [
                                             { name: "saml_federation_metadata", value: Config.saml_federation_metadata },
                                             { name: "saml_issuer", value: Config.saml_issuer },
+                                            { name: "saml_baseurl", value: Config.protocol + "://" + hostname + "/" },
                                             { name: "nodered_id", value: name },
                                             { name: "nodered_sa", value: cli.user.username },
                                             { name: "jwt", value: nodered_jwt },
@@ -742,6 +745,7 @@ export class Message {
                                             { name: "api_ws_url", value: Config.api_ws_url },
                                             { name: "amqp_url", value: Config.amqp_url },
                                             { name: "nodered_domain_schema", value: hostname },
+                                            { name: "domain", value: hostname },
                                             { name: "protocol", value: Config.protocol },
                                             { name: "port", value: Config.port.toString() },
                                             { name: "noderedusers", value: (name + "noderedusers") },
