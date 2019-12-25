@@ -45,16 +45,18 @@
   <div class="container-table100">
     <div class="wrap-table100">
       <div class="table100 ver6 m-b-110">
-        <table data-vertable="ver6">
+        <table data-vertable="ver6"  id="table1" class="table table-striped" when-scrolled="ctrl.more()">
           <thead>
             <tr class="row100 head">
-              <th class="column100 column1" data-column="column1">Test</th>
-              <th class="column100 column2" data-column="column2">Sunday</th>
-              <th class="column100 column3" data-column="column3">Monday</th>
-              <th class="column100 column4" data-column="column4">Tuesday</th>
+              <th class="column100 column1" data-column="column1">{{model._createdby}}</th>
+              <th class="column100 column2" data-column="column2">{{model.name}}</th>
+              <th class="column100 column3" data-column="column3"><timesince ng-model="model._created" /></th>
+              <th class="column100 column4" data-column="column4"><timesince ng-model="model._modified" /></th>
+              <th><a ng-href="#/Form/{{model.workflow}}/{{model._id}}" ng-disabled="ctrl.loading==true" translate
+                lib="web">open</a></th>
             </tr>
           </thead>
-          <tbody>
+          <!-- <tbody>
             <tr class="row100">
               <td class="column100 column1" data-column="column1">Lawrence Scott</td>
               <td class="column100 column2" data-column="column2">8:00 AM</td>
@@ -110,7 +112,7 @@
               <td class="column100 column3" data-column="column3">--</td>
               <td class="column100 column4" data-column="column4">--</td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
       </div>
     </div>
