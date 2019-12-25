@@ -662,7 +662,7 @@ iframe {
 
 .container-table100 {
   width: 100%;
-  background: #f4f4f4;
+  /* background: #f4f4f4; */
 
   display: -webkit-box;
   display: -webkit-flex;
