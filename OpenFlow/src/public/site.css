@@ -384,7 +384,7 @@ a:hover{
   padding: 10px 0px 0px 25px;
 }
 .headerbg{
-  background-color: #006d82;
+  background-color: #00abcb;
 }
 @media (max-width:770px) and (min-width:400px) {
   .btn-google{
@@ -672,7 +672,7 @@ iframe {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 33px 30px;
+  padding: 33px 0px;
 }
 
 .wrap-table100 {
@@ -739,7 +739,7 @@ th, td {
 
 .table100.ver6 th {
   font-family: Montserrat-Medium;
-  font-size: 12px;
+  font-size: 14px;
   color: #fff;
   line-height: 1.4;
   text-transform: uppercase;
