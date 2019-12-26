@@ -1,9 +1,9 @@
-<div class="row pt-4 mt-4">
- <div class="pt-4 col-sm-6 ">
+<div class="row pt-4 ">
+ <div class="pt-4 col-sm-8 ">
   <h3 class="page-header" translate lib="web">sitename</h3>
   <p class="col-md-5 lead"></p>
  </div>
-  <div class="pt-4 form-group col-sm-6 form-horizontal">
+  <div class="pt-4 form-group col-sm-4 form-horizontal">
     
     <div class="input-group unframed-addons">
       <label class="sr-only">Filter</label>
@@ -41,6 +41,7 @@
   </tbody>
 </table>
 	 -->
+
 <div class="limiter">
   <div class="container-table100">
     <div class="wrap-table100">
@@ -48,10 +49,11 @@
         <table data-vertable="ver6"  id="table1" class="table table-striped" when-scrolled="ctrl.more()">
           <thead>
             <tr class="row100 head">
-              <th class="column100 column1" data-column="column1"><b translate lib="web">createdby</b></th>
-              <th class="column100 column2" data-column="column2"><b translate lib="web">name</b></th>
-              <th class="column100 column3" data-column="column3"><b translate lib="web">created</b></th>
-              <th class="column100 column4" data-column="column4"><b translate lib="web">updated</b></th>
+              <th class="column100 column1" data-column="column1"><b translate lib="web">Created By</b></th>
+              <th class="column100 column2" data-column="column2"><b translate lib="web">Name</b></th>
+              <th class="column100 column3" data-column="column3"><b translate lib="web">Creation Date</b></th>
+              <th class="column100 column4" data-column="column4"><b translate lib="web">Updated Date</b></th>
+              <th class="column100 column4" data-column="column4"><b translate lib="web"></b></th>
             </tr>
           </thead>
        <tbody>
@@ -63,108 +65,9 @@
               <td class="column100 column1" data-column="column1"><a ng-href="#/Form/{{model.workflow}}/{{model._id}}" ng-disabled="ctrl.loading==true" translate
                 lib="web">open</a></td>
             </tr>
-
-            <!-- <tr class="row100">
-              <td class="column100 column1" data-column="column1">Jane Medina</td>
-              <td class="column100 column2" data-column="column2">--</td>
-              <td class="column100 column3" data-column="column3">5:00 PM</td>
-              <td class="column100 column4" data-column="column4">5:00 PM</td>
-            </tr>
-
-            <tr class="row100">
-              <td class="column100 column1" data-column="column1">Billy Mitchell</td>
-              <td class="column100 column2" data-column="column2">9:00 AM</td>
-              <td class="column100 column3" data-column="column3">--</td>
-              <td class="column100 column4" data-column="column4">--</td>
-            </tr>
-
-            <tr class="row100">
-              <td class="column100 column1" data-column="column1">Beverly Reid</td>
-              <td class="column100 column2" data-column="column2">--</td>
-              <td class="column100 column3" data-column="column3">5:00 PM</td>
-              <td class="column100 column4" data-column="column4">5:00 PM</td>
-            </tr>
-
-            <tr class="row100">
-              <td class="column100 column1" data-column="column1">Tiffany Wade</td>
-              <td class="column100 column2" data-column="column2">8:00 AM</td>
-              <td class="column100 column3" data-column="column3">--</td>
-              <td class="column100 column4" data-column="column4">--</td>
-            </tr>
-
-            <tr class="row100">
-              <td class="column100 column1" data-column="column1">Sean Adams</td>
-              <td class="column100 column2" data-column="column2">--</td>
-              <td class="column100 column3" data-column="column3">5:00 PM</td>
-              <td class="column100 column4" data-column="column4">5:00 PM</td>
-            </tr>
-
-            <tr class="row100">
-              <td class="column100 column1" data-column="column1">Rachel Simpson</td>
-              <td class="column100 column2" data-column="column2">9:00 AM</td>
-              <td class="column100 column3" data-column="column3">--</td>
-              <td class="column100 column4" data-column="column4">--</td>
-            </tr>
-
-            <tr class="row100">
-              <td class="column100 column1" data-column="column1">Mark Salazar</td>
-              <td class="column100 column2" data-column="column2">8:00 AM</td>
-              <td class="column100 column3" data-column="column3">--</td>
-              <td class="column100 column4" data-column="column4">--</td>
-            </tr> -->
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
-
-<!-- 
-<table>
-  <thead>
-    <tr>
-      <th>Column 1</th>
-      <th>Column 2</th>
-      <th>Column 3</th>
-      <th>Column 4</th>
-      <th>Column 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Cell 1</td>
-      <td>Cell 2</td>
-      <td>Cell 3</td>
-      <td>Cell 4</td>
-      <td>Cell 5</td>
-    </tr>
-    <tr>
-      <td>Cell 1</td>
-      <td>Cell 2</td>
-      <td>Cell 3</td>
-      <td>Cell 4</td>
-      <td>Cell 5</td>
-    </tr>
-    <tr>
-      <td>Cell 1</td>
-      <td>Cell 2</td>
-      <td>Cell 3</td>
-      <td>Cell 4</td>
-      <td>Cell 5</td>
-    </tr>
-    <tr>
-      <td>Cell 1</td>
-      <td>Cell 2</td>
-      <td>Cell 3</td>
-      <td>Cell 4</td>
-      <td>Cell 5</td>
-    </tr>
-    <tr>
-      <td>Cell 1</td>
-      <td>Cell 2</td>
-      <td>Cell 3</td>
-      <td>Cell 4</td>
-      <td>Cell 5</td>
-    </tr>
-  </tbody>
-</table> -->

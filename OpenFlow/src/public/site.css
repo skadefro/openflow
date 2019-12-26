@@ -475,12 +475,12 @@ a:hover{
   position: absolute;
   z-index: 99;
   top: 12px;
-  left: 10px;
+  left: 25px;
 }
 .search-input{
-  padding-left: 35px;
+  padding-left: 45px;
     font-size: 16px;
-    color: #7e7e7e;
+    color: #fff;
     font-weight: bold;
 }
 .page-header{
@@ -566,75 +566,18 @@ body {
   margin-right: 0;
 }
 
-/* Sidebar Styles */
-
-#sidebar {
-  z-index: 1000;
-  position: fixed;
-  left: 250px;
-  width: 250px;
-  height: 100%;
-  margin-left: -250px;
-  overflow-y: auto;
-  background: #37474F;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+.form-control:focus, .form-control:hover, .form-control:visited,
+ .form-control:active,.input-group>.custom-select:not(:first-child),
+ .input-group>.form-control:not(:first-child){
+  border-radius: 30px;
+  -webkit-box-shadow: 0px 1px 16px -6px rgba(0,149,255,0.66);
+-moz-box-shadow: 0px 1px 16px -6px rgba(0,149,255,0.66);
+box-shadow: 0px 1px 16px -6px rgba(0,149,255,0.66);
+background: linear-gradient(-68deg, #abff9e , #0097b9)
 }
-
-#sidebar header {
-  background-color: #263238;
-  font-size: 20px;
-  line-height: 52px;
-  text-align: center;
-}
-
-#sidebar header a {
-  color: #fff;
-  display: block;
-  text-decoration: none;
-}
-
-#sidebar header a:hover {
+.input-group-addon.flow-search  .fa-search{
   color: #fff;
 }
-
-#sidebar .nav{
-  
-}
-
-#sidebar .nav a{
-  background: none;
-  border-bottom: 1px solid #455A64;
-  color: #CFD8DC;
-  font-size: 14px;
-  padding: 16px 24px;
-}
-
-#sidebar .nav a:hover{
-  background: none;
-  color: #ECEFF1;
-}
-
-#sidebar .nav a i{
-  margin-right: 16px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ------------------------------------ */
 button {
 	outline: none !important;
@@ -738,11 +681,9 @@ th, td {
 }
 
 .table100.ver6 th {
-  font-family: Montserrat-Medium;
   font-size: 14px;
   color: #fff;
   line-height: 1.4;
-  text-transform: uppercase;
 
   background-color: rgba(255,255,255,0.32);
 }
