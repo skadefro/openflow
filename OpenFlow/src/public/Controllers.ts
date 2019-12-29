@@ -835,6 +835,7 @@ module openflow {
             console.debug("UserCtrl");
             this.collection = "users";
             this.postloadData = this.processdata;
+            this.memberof = [];
             WebSocketClient.onSignedin((user: TokenUser) => {
                 if (this.id !== null && this.id !== undefined) {
                     this.loadData();
@@ -846,12 +847,13 @@ module openflow {
                     this.model.newpassword = "";
                     this.model.sid = "";
                     this.model.federationids = [];
+                    this.processdata();
                 }
 
             });
         }
         async processdata() {
-            if (this.model != null) {
+            if (this.model != null && (this.model._id != null && this.model._id != "")) {
                 this.memberof = await this.api.Query("users",
                     {
                         $and: [
@@ -896,6 +898,7 @@ module openflow {
                 }, null, { _type: -1, name: 1 }, 5);
             for (var i = 0; i < currentmemberof.length; i++) {
                 var memberof = currentmemberof[i];
+                if (this.memberof == null || this.memberof == undefined) this.memberof = [];
                 var exists = this.memberof.filter(x => x._id == memberof._id);
                 if (exists.length == 0) {
                     console.log("Updating members of " + memberof.name + " " + memberof._id);
@@ -1974,6 +1977,7 @@ module openflow {
         public newkey: string = "";
         public showjson: boolean = false;
         public jsonmodel: string = "";
+        public message: string = "";
         constructor(
             public $scope: ng.IScope,
             public $location: ng.ILocationService,
@@ -1992,13 +1996,16 @@ module openflow {
                     await this.loadData();
                 } else {
                     this.model = new openflow.Base();
-                    this.model._type = "role";
-                    this.model.name = "";
+                    this.model._type = "test";
+                    this.model.name = "new item";
+                    this.model._encrypt = [];
+                    this.model._acl = [];
                     this.keys = Object.keys(this.model);
                     for (var i: number = this.keys.length - 1; i >= 0; i--) {
                         if (this.keys[i].startsWith('_')) this.keys.splice(i, 1);
                     }
-                    if (!this.$scope.$$phase) { this.$scope.$apply(); }
+                    this.processdata();
+                    //if (!this.$scope.$$phase) { this.$scope.$apply(); }
                 }
             });
         }
@@ -2015,6 +2022,22 @@ module openflow {
                 }
             }
             if (!this.$scope.$$phase) { this.$scope.$apply(); }
+            this.fixtextarea();
+        }
+        fixtextarea() {
+            setTimeout(() => {
+                var tx = document.getElementsByTagName('textarea');
+                for (var i = 0; i < tx.length; i++) {
+                    tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
+                    tx[i].addEventListener("input", OnInput, false);
+                }
+
+                function OnInput() {
+                    this.style.height = 'auto';
+                    this.style.height = (this.scrollHeight) + 'px';
+                }
+
+            }, 500);
         }
         togglejson() {
             this.showjson = !this.showjson;
@@ -2022,11 +2045,23 @@ module openflow {
                 this.jsonmodel = JSON.stringify(this.model, null, 2);
             } else {
                 this.model = JSON.parse(this.jsonmodel);
+                this.keys = Object.keys(this.model);
+                for (var i: number = this.keys.length - 1; i >= 0; i--) {
+                    if (this.keys[i].startsWith('_')) this.keys.splice(i, 1);
+                }
             }
+            if (!this.$scope.$$phase) { this.$scope.$apply(); }
+            this.fixtextarea();
         }
         async submit(): Promise<void> {
             if (this.showjson) {
-                this.model = JSON.parse(this.jsonmodel);
+                try {
+                    this.model = JSON.parse(this.jsonmodel);
+                } catch (error) {
+                    this.message = error;
+                    if (!this.$scope.$$phase) { this.$scope.$apply(); }
+                    return;
+                }
             }
             if (this.model._id) {
                 await this.api.Update(this.collection, this.model);

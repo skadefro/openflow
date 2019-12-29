@@ -85,7 +85,7 @@ export class DatabaseConnection {
         var removed: Rolemember[] = [];
         if (original != null && Config.update_acl_based_on_groups == true) {
             for (var i = original.members.length - 1; i >= 0; i--) {
-                var ace = item.members[i];
+                var ace = original.members[i];
                 var exists = item.members.filter(x => x._id == ace._id);
                 if (exists.length == 0) {
                     removed.push(ace);
@@ -103,6 +103,15 @@ export class DatabaseConnection {
             for (var i = item.members.length - 1; i >= 0; i--) {
                 {
                     var ace = item.members[i];
+                    if (Config.update_acl_based_on_groups == true) {
+                        if (multi_tenant_skip.indexOf(item._id) > -1) {
+                            if (ace._id != WellknownIds.admins && ace._id != WellknownIds.root) {
+                                item.removeRight(ace._id, [Rights.read]);
+                            }
+                        } else {
+                            item.addRight(ace._id, ace.name, [Rights.read]);
+                        }
+                    }
                     var exists = item.members.filter(x => x._id == ace._id);
                     if (exists.length > 1) {
                         item.members.splice(i, 1);
@@ -118,9 +127,11 @@ export class DatabaseConnection {
                                 console.log("Running in multi tenant mode, skip adding permissions for " + item.name);
                             } else if (arr[0]._type == "user") {
                                 var u: User = User.assign(arr[0]);
-                                if (u.getRight(item._id) == null) {
+                                if (!u.hasRight(item._id, Rights.read)) {
                                     console.log("Assigning " + item.name + " read permission to " + u.name);
                                     u.addRight(item._id, item.name, [Rights.read], false);
+
+                                    await this.db.collection("users").updateOne({ _id: u._id }, { $set: { _acl: u._acl } });
                                     // await this.db.collection("users").save(u);
                                 } else if (u._id != item._id) {
                                     console.log(item.name + " allready exists on " + u.name);
@@ -129,9 +140,10 @@ export class DatabaseConnection {
                                 var r: Role = Role.assign(arr[0]);
                                 if (r._id == WellknownIds.admins || r._id == WellknownIds.users) {
                                 }
-                                if (r.getRight(item._id) == null) {
+                                if (!r.hasRight(item._id, Rights.read)) {
                                     console.log("Assigning " + item.name + " read permission to " + r.name);
                                     r.addRight(item._id, item.name, [Rights.read], false);
+                                    await this.db.collection("users").updateOne({ _id: r._id }, { $set: { _acl: r._acl } });
                                     // await this.db.collection("users").save(r);
                                 } else if (r._id != item._id) {
                                     console.log(item.name + " allready exists on " + r.name);
@@ -144,33 +156,42 @@ export class DatabaseConnection {
             }
         }
 
-        for (var i = removed.length - 1; i >= 0; i--) {
-            var ace = removed[i];
-            var arr = await this.db.collection("users").find({ _id: ace._id }).project({ name: 1, _acl: 1, _type: 1 }).limit(1).toArray();
-            if (arr.length == 1 && item._id != WellknownIds.admins && item._id != WellknownIds.root) {
-                if (Config.multi_tenant && multi_tenant_skip.indexOf(item._id) > -1) {
-                    // when multi tenant don't allow members of common user groups to see each other
-                    console.log("Running in multi tenant mode, skip removing permissions for " + item.name);
-                } else if (arr[0]._type == "user") {
-                    var u: User = User.assign(arr[0]);
-                    if (u.getRight(item._id) != null) {
-                        console.log("Removing " + item.name + " read permissions from " + u.name);
-                        u.removeRight(item._id, [Rights.read]);
-                        // await this.db.collection("users").save(u);
-                    } else {
-                        console.log("No need to remove " + item.name + " read permissions from " + u.name);
-                    }
-                } else if (arr[0]._type == "role") {
-                    var r: Role = Role.assign(arr[0]);
-                    if (r.getRight(item._id) != null) {
-                        console.log("Removing " + item.name + " read permissions from " + r.name);
-                        r.removeRight(item._id, [Rights.read]);
-                        // await this.db.collection("users").save(r);
-                    } else {
-                        console.log("No need to remove " + item.name + " read permissions from " + u.name);
-                    }
+        if (Config.update_acl_based_on_groups) {
+            for (var i = removed.length - 1; i >= 0; i--) {
+                var ace = removed[i];
+
+                if (ace._id != WellknownIds.admins && ace._id != WellknownIds.root) {
+                    item.removeRight(ace._id, [Rights.read]);
                 }
 
+                var arr = await this.db.collection("users").find({ _id: ace._id }).project({ name: 1, _acl: 1, _type: 1 }).limit(1).toArray();
+                if (arr.length == 1 && item._id != WellknownIds.admins && item._id != WellknownIds.root) {
+                    if (Config.multi_tenant && multi_tenant_skip.indexOf(item._id) > -1) {
+                        // when multi tenant don't allow members of common user groups to see each other
+                        console.log("Running in multi tenant mode, skip removing permissions for " + item.name);
+                    } else if (arr[0]._type == "user") {
+                        var u: User = User.assign(arr[0]);
+                        if (u.hasRight(item._id, Rights.read)) {
+                            console.log("Removing " + item.name + " read permissions from " + u.name);
+                            u.removeRight(item._id, [Rights.read]);
+                            // await this.db.collection("users").save(u);
+                            await this.db.collection("users").updateOne({ _id: u._id }, { $set: { _acl: u._acl } });
+                        } else {
+                            console.log("No need to remove " + item.name + " read permissions from " + u.name);
+                        }
+                    } else if (arr[0]._type == "role") {
+                        var r: Role = Role.assign(arr[0]);
+                        if (r.hasRight(item._id, Rights.read)) {
+                            console.log("Removing " + item.name + " read permissions from " + r.name);
+                            r.removeRight(item._id, [Rights.read]);
+                            // await this.db.collection("users").save(r);
+                            await this.db.collection("users").updateOne({ _id: r._id }, { $set: { _acl: r._acl } });
+                        } else {
+                            console.log("No need to remove " + item.name + " read permissions from " + u.name);
+                        }
+                    }
+
+                }
             }
         }
         return item;
@@ -188,7 +209,7 @@ export class DatabaseConnection {
      * @returns Promise<T[]> Array of results
      */
     // tslint:disable-next-line: max-line-length
-    async query<T extends Base>(query: any, projection: Object, top: number, skip: number, orderby: Object | string, collectionname: string, jwt: string): Promise<T[]> {
+    async query<T extends Base>(query: any, projection: Object, top: number, skip: number, orderby: Object | string, collectionname: string, jwt: string, queryas: string = null): Promise<T[]> {
         var arr: T[] = [];
         await this.connect();
         var mysort: Object = {};
@@ -236,13 +257,22 @@ export class DatabaseConnection {
         var _query: Object = {};
         if (collectionname === "files") { collectionname = "fs.files"; }
         if (collectionname === "fs.files") {
-            _query = { $and: [query, this.getbasequery(jwt, "metadata._acl", [Rights.read])] };
+            if (!Util.IsNullEmpty(queryas)) {
+                _query = { $and: [query, this.getbasequery(jwt, "metadata._acl", [Rights.read]), await this.getbasequeryuserid(queryas, "metadata._acl", [Rights.read])] };
+            } else {
+                _query = { $and: [query, this.getbasequery(jwt, "metadata._acl", [Rights.read])] };
+            }
             projection = null;
         } else {
-            if (!collectionname.endsWith("_hist")) {
-                _query = { $and: [query, this.getbasequery(jwt, "_acl", [Rights.read])] };
+            // if (!collectionname.endsWith("_hist")) {
+            //     _query = { $and: [query, this.getbasequery(jwt, "_acl", [Rights.read])] };
+            // } else {
+            //     // todo: enforcer permissions when fetching _hist ?
+            //     _query = { $and: [query, this.getbasequery(jwt, "_acl", [Rights.read])] };
+            // }
+            if (!Util.IsNullEmpty(queryas)) {
+                _query = { $and: [query, this.getbasequery(jwt, "_acl", [Rights.read]), await this.getbasequeryuserid(queryas, "_acl", [Rights.read])] };
             } else {
-                // todo: enforcer permissions when fetching _hist ?
                 _query = { $and: [query, this.getbasequery(jwt, "_acl", [Rights.read])] };
             }
         }
@@ -438,6 +468,20 @@ export class DatabaseConnection {
             item = await this.Cleanmembers(item as any, null);
         }
 
+        if (collectionname === "users" && item._type === "user") {
+            var u: TokenUser = (item as any);
+            if (u.username == null || u.username == "") { throw new Error("Username is mandatory"); }
+            if (u.name == null || u.name == "") { throw new Error("Name is mandatory"); }
+            var exists = await User.FindByUsername(u.username, TokenUser.rootToken());
+            if (exists != null) { throw new Error("Access denied"); }
+        }
+        if (collectionname === "users" && item._type === "role") {
+            var r: Role = (item as any);
+            if (r.name == null || r.name == "") { throw new Error("Name is mandatory"); }
+            var exists2 = await Role.FindByName(r.name);
+            if (exists2 != null) { throw new Error("Access denied"); }
+        }
+
         // var options:CollectionInsertOneOptions = { writeConcern: { w: parseInt((w as any)), j: j } };
         var options: CollectionInsertOneOptions = { w: w, j: j };
         //var options: CollectionInsertOneOptions = { w: "majority" };
@@ -446,7 +490,7 @@ export class DatabaseConnection {
         if (collectionname === "users" && item._type === "user") {
             var users: Role = await Role.FindByNameOrId("users", jwt);
             users.AddMember(item);
-            await users.Save(jwt)
+            await users.Save(jwt);
         }
         if (collectionname === "users" && item._type === "role") {
             item.addRight(item._id, item.name, [Rights.read]);
@@ -936,30 +980,12 @@ export class DatabaseConnection {
             };
             finalor.push(q2);
         }
-        // 
-        // if (bits.length > 0 && (bits[0] + 1) == Rights.read) {
-        //     this._logger.debug("[" + user.username + "] Include isme in base query");
-        //     return { $or: finalor.concat(isme) };
-        // } else if (bits.length > 0) {
-        //     this._logger.debug("[" + user.username + "] Skip isme in base query, not read (" + bits[0] + ")");
-        // } else {
-        //     this._logger.debug("[" + user.username + "] Skip isme in base query, bits missing!");
-        // }
-        // if(bits.length==1 && (bits[0]+1) == Rights.read)
-        // {
-        //     for (var i: number = 0; i < user.roles.length; i++) {
-        //         var role = user.roles[i];
-        //         if(role._id!=WellknownIds.admins && role._id!=WellknownIds.robots && role._id!=WellknownIds.nodered_users && 
-        //             role._id!=WellknownIds.nodered_admins && role._id!=WellknownIds.nodered_api_users && role._id!=WellknownIds.filestore_users && 
-        //             role._id!=WellknownIds.filestore_admins && role._id!=WellknownIds.robot_users && role._id!=WellknownIds.robot_admins
-        //             && role._id!=WellknownIds.personal_nodered_users)
-        //             {
-
-        //             }
-        //     }
-
-        // }
         return { $or: finalor.concat() };
+    }
+    private async getbasequeryuserid(userid: string, field: string, bits: number[]): Promise<Object> {
+        var user = await User.FindByUsernameOrId(null, userid);
+        var jwt = Crypt.createToken(user, "5m");
+        return this.getbasequery(jwt, field, bits);
     }
     /**
      * Ensure _type and _acs on object
