@@ -1,43 +1,52 @@
-<div class="row">
-  <h1 translate lib="web">entities</h1>
-  <p class="col-md-5 lead"></p>
-  <div class="form-group col-sm-3 form-horizontal">
-    <label class="sr-only">Filter</label>
+<div class="row pt-4 entiries-page pb-3">
+  <div class="pt-4 col-sm-8 ">
+    <h3 class="page-header" translate lib="web">entities</h3>
+  <p  class="col-md-5 lead"></p>
+  </div>
+ 
+
+
+  <div class="pt-4 form-group col-sm-4 form-horizontal">
+     
     <div class="input-group unframed-addons">
-      <div class="input-group-addon"><i class="fas fa-search"></i></div>
-      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md"
+      <label class="sr-only">Filter</label>
+      <div  class="input-group-addon flow-search ">
+        <i class="fas fa-search"></i></div>
+      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md rel-posi search-input"
         ng-model-options="{debounce: 400}" />
     </div>
   </div>
 </div>
 
 
-<div class="row">
-  <div class="col-md-6">
-    <div className="btn-group-justified">
-      <div class="btn-group" role="group">
-        <select ng-model="ctrl.collection" ng-options="item.name as item.name for item in ctrl.collections"
-          ng-change="ctrl.SelectCollection()">
-        </select>
-        <a href ng-click="ctrl.DropCollection()" class="btn btn-secondary" translate lib="web"
-          ng-show="ctrl.WebSocketClient.user.username=='az'"" ng-disabled=" ctrl.loading==true">Drop</a>
-        <a href ng-click="ctrl.DeleteMany()" class="btn btn-secondary" translate lib="web"
-          ng-show="ctrl.WebSocketClient.user.username=='az'"" ng-disabled=" ctrl.loading==true">empty</a>
-      </div>
 
-    </div>
-  </div>
-  <div class=" col-md-6 text-right">
-    <!-- <a ng-href="#/Entity/{{ctrl.collection}}" class="btn btn-info" translate lib="web">addentity</a> -->
-    <a ng-href="#/Entity/{{ctrl.collection}}" class="btn btn-info"><i class="az-add-lg"></i></a>
-  </div>
-</div>
 
 <div class="limiter">
   <div class="container-table100">
+    <div class="row width100P">
+      <div class="col-md-6">
+        <div className="btn-group-justified">
+          <div class="btn-group" role="group">
+            <select class="select-entities" ng-model="ctrl.collection" ng-options="item.name as item.name for item in ctrl.collections "
+              ng-change="ctrl.SelectCollection()">
+            </select>
+            <a href ng-click="ctrl.DropCollection()" class="btn btn-secondary" translate lib="web"
+              ng-show="ctrl.WebSocketClient.user.username=='az'"" ng-disabled=" ctrl.loading==true">Drop</a>
+            <a href ng-click="ctrl.DeleteMany()" class="btn btn-secondary" translate lib="web"
+              ng-show="ctrl.WebSocketClient.user.username=='az'"" ng-disabled=" ctrl.loading==true">empty</a>
+          </div>
+    
+        </div>
+      </div>
+      <div class=" col-md-6 text-right add-btn">
+        <!-- <a ng-href="#/Entity/{{ctrl.collection}}" class="btn btn-info" translate lib="web">addentity</a> -->
+        <a ng-href="#/Entity/{{ctrl.collection}}" class="btn btn-info"><i class="az-add-lg"></i></a>
+      </div>
+     
+    </div>
     <div class="wrap-table100">
-      <div class="table100 ver6 m-b-110">
-        <table data-vertable="ver6" id="table1" class="table table-striped" when-scrolled="ctrl.more()">
+      <div class="table100 ver3 m-b-110">
+        <table data-vertable="ver3" id="table1" class="table table-striped" when-scrolled="ctrl.more()">
           <thead>
             <tr class="row100 head">
               <th class="column100 column1" data-column="column1" scope="col" ng-click="ctrl.ToggleOrder('name')"><b
@@ -56,7 +65,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="model in ctrl.models">
+            <tr  class="row100"  ng-repeat="model in ctrl.models">
               <td class="column100 column1">{{model.name}}</td>
               <td class="column100 column1"><span translate lib="web">{{model.type || model._type}}</span></td>
               <td class="column100 column1">{{model._createdby}}</td>

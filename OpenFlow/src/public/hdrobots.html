@@ -17,7 +17,7 @@
   </div>
   <div class=" col-md-6 text-right">
     <!-- <a ng-href="#/Entity/{{ctrl.collection}}" class="btn btn-info" translate lib="web">addentity</a> -->
-    <a ng-href="#/Entity/{{ctrl.collection}}" class="btn btn-info"><i class="az-add-lg"></i></a>
+    <a ng-href="#/hdrobot" class="btn btn-info"><i class="az-add-lg"></i></a>
   </div>
 </div>
 
@@ -44,7 +44,7 @@
         <timesince ng-model="model._modified" />
       </td>
       <td class="btn-cell">
-        <a ng-href="#/Entity/{{ctrl.collection}}/{{model._id}}" class="table-btn"><i class="az-edit"></i></a>
+        <a ng-href="#/hdrobot/{{model._id}}" class="table-btn"><i class="az-edit"></i></a>
       </td>
       <td class="btn-cell">
         <a href ng-click="ctrl.DeleteOne(model)" ng-disabled="ctrl.loading==true" class="table-btn"><i

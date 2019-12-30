@@ -2511,4 +2511,59 @@ module openflow {
             if (!this.$scope.$$phase) { this.$scope.$apply(); }
         }
     }
+    export class hdrobotCtrl extends entityCtrl<openflow.unattendedclient> {
+        public servers: openflow.unattendedserver[] = [];
+        public server:openflow.unattendedserver = null;
+        constructor(
+            public $scope: ng.IScope,
+            public $location: ng.ILocationService,
+            public $routeParams: ng.route.IRouteParamsService,
+            public $interval: ng.IIntervalService,
+            public WebSocketClient: WebSocketClient,
+            public api: api
+        ) {
+            super($scope, $location, $routeParams, $interval, WebSocketClient, api);
+            console.debug("hdrobotCtrl");
+            this.collection = "openrpa";
+            this.postloadData = this.processdata;
+            WebSocketClient.onSignedin((user: TokenUser) => {
+                if (this.id !== null && this.id !== undefined) {
+                    this.loadData();
+                } else {
+                    this.model = new openflow.unattendedclient();
+                    this.model._type = "unattendedclient";
+                    this.processdata();
+                }
+
+            });
+        }
+        async processdata() {
+            this.servers = await this.api.Query("openrpa", { _type: "unattendedserver" }, null, null);
+
+            var arr = this.servers.filter(x=> x.computerfqdn==this.model.computerfqdn);
+            if(arr.length > 0)
+            {
+                this.server = arr[0];
+            }
+            
+
+            if (!this.$scope.$$phase) { this.$scope.$apply(); }
+        }
+        async submit(): Promise<void> {
+            if (this.server != null && this.server != undefined) {
+                this.model.computername = this.server.computername;
+                this.model.computerfqdn = this.server.computerfqdn;
+            }
+            if (this.model._id) {
+                await this.api.Update(this.collection, this.model);
+            } else {
+                await this.api.Insert(this.collection, this.model);
+            }
+            this.$location.path("/hdrobots");
+
+            if (!this.$scope.$$phase) { this.$scope.$apply(); }
+        }
+    }
+
+
 }

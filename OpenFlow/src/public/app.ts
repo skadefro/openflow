@@ -70,6 +70,8 @@ module openflow {
                 .when('/Nodered', { templateUrl: 'Nodered.html', controller: NoderedCtrl, controllerAs: 'ctrl' })
 
                 .when('/hdrobots', { templateUrl: 'hdrobots.html', controller: hdrobotsCtrl, controllerAs: 'ctrl' })
+                .when('/hdrobot', { templateUrl: 'hdrobot.html', controller: hdrobotCtrl, controllerAs: 'ctrl' })
+                .when('/hdrobot/:id', { templateUrl: 'hdrobot.html', controller: hdrobotCtrl, controllerAs: 'ctrl' })
 
                 .otherwise({ redirectTo: '/main' });
         }
