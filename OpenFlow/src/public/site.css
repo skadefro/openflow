@@ -1134,4 +1134,7 @@ th, td {
 .limiter .select-entities{
   padding: 10px 15px;
   border-radius: 4px;
+  background-color: #e03e9c;
+  border: 1px solid #e03e9c;
+  color: #fff;
 }
