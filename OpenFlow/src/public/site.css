@@ -473,8 +473,9 @@ a:hover{
   cursor: pointer;
 }
 .column100.column1 a{
-  color: #fff;
+  color: #6c7ae0;
   font-size: 14px;
+  font-weight: bold;
 }
 /*----------------------------Openflow------------------------------*/
 .flow-search{
@@ -491,7 +492,7 @@ a:hover{
 }
 .page-header{
   font-weight: bold;
-  color: #006d82;
+  color: #6c7ae0;
 }
 .table.table-striped .thead-dark th{
     background-color: #00576f;

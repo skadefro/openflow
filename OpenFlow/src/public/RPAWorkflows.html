@@ -1,42 +1,54 @@
-<div class="row">
-  <h1 translate lib="web">rpaworkflows</h1>
-  <p class="col-md-5 lead"></p>
-  <div class="form-group col-sm-3 form-horizontal">
-    <label class="sr-only">Filter</label>
+<div class="row pt-4 entiries-page pb-3">
+  <div class="pt-4 col-sm-8 ">
+    <h3 class="page-header" translate lib="web">rpaworkflows</h3>
+    <p class="col-md-5 lead"></p>
+  </div>
+  <div class="pt-4 form-group col-sm-4 form-horizontal">
     <div class="input-group unframed-addons">
-      <div class="input-group-addon"><i class="fas fa-search"></i></div>
-      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md"
+      <label class="sr-only">Filter</label>
+      <div class="input-group-addon flow-search ">
+        <i class="fas fa-search"></i></div>
+      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md rel-posi search-input"
         ng-model-options="{debounce: 400}" />
     </div>
   </div>
 </div>
-<div class="row">
-  <table id="table1" class="table table-striped" when-scrolled="ctrl.more()" style="width: 100%;">
-    <thead class="thead-dark">
-      <tr>
-        <th ng-click="ctrl.ToggleOrder('name')"><b translate lib="web">name</b></th>
-        <th ng-click="ctrl.ToggleOrder('_createdby')"><b translate lib="web">who</b></th>
-        <th ng-click="ctrl.ToggleOrder('_modified')"><b translate lib="web">updated</b></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="model in ctrl.models">
-        <td>{{model.name}}</td>
-        <td>{{model._createdby}}</td>
-        <td>
-          <timesince ng-model="model._modified" />
-        </td>
-        <td class="btn-cell" height="40px" width="200">
-          <canvas id="bar" class="model.chart-base" chart-type="model.chart.charttype" chart-data="model.chart.data"
-            chart-labels="model.chart.labels" chart-series="model.chart.series" height="40px" width="200">
-          </canvas>
-        </td>
-        <td class="btn-cell">
-          <a ng-href="#/RPAWorkflow/{{model._id}}" ng-disabled="ctrl.loading==true" translate lib="web">invoke</a>
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="limiter">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100 ver3 m-b-110">
+        <table data-vertable="ver3" id="table1" class="table table-striped" when-scrolled="ctrl.more()">
+          <thead>
+            <tr class="row100 head">
+              <th class="column100 column1" data-column="column1" scope="col" ng-click="ctrl.ToggleOrder('name')"><b
+                  translate lib="web">name</b></th>
+              <th class="column100 column1" data-column="column1" scope="col" ng-click="ctrl.ToggleOrder('_createdby')">
+                <b translate lib="web">who</b></th>
+              <th class="column100 column1" data-column="column1" scope="col" ng-click="ctrl.ToggleOrder('_modified')">
+                <b translate lib="web">updated</b></th class="column100 column1" data-column="column1" scope="col">
+              <th class="column100 column1" data-column="column1" scope="col"></th>
+              <th class="column100 column1" data-column="column1" scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row100" ng-repeat="model in ctrl.models">
+              <td class="column100 column1">{{model.name}}</td>
+              <td class="column100 column1"><span translate lib="web">{{model._createdby}}</span></td>
+              <td class="column100 column1">
+                <timesince ng-model="model._modified" />
+              </td class="column100 column1">
+              <td class="column100 column1">
+                <canvas id="bar" class="model.chart-base" chart-type="model.chart.charttype"
+                  chart-data="model.chart.data" chart-labels="model.chart.labels" chart-series="model.chart.series"
+                  height="40px" width="200">
+                </canvas></td>
+              <td class="column100 column1">
+                <a ng-href="#/RPAWorkflow/{{model._id}}" ng-disabled="ctrl.loading==true" translate lib="web">invoke</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
