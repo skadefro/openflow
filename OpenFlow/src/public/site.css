@@ -316,6 +316,11 @@ box-shadow: 0px 1px 5px 3px rgba(0, 94, 122, 0.48)
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
+.btn-outline-secondary, .btn-outline-secondary:hover, .btn-outline-secondary:focus{
+  color: #ffffff;
+    border-color: #fff;
+    background-color: transparent;
+}
 .qr-code{
   font-family: Raleway-Regular;
   font-size: 16px;
@@ -384,7 +389,7 @@ a:hover{
   padding: 10px 0px 0px 25px;
 }
 .headerbg{
-  background-color: #e03e9c;
+  background-color: #6c7ae0;
 }
 @media (max-width:770px) and (min-width:400px) {
   .btn-google{
@@ -1122,20 +1127,68 @@ th, td {
 }
 
 .table100.ver3 .row100 td:hover {
-  background-color: #e03e9c !important;
+  background-color: #ffa8da !important;
   color: #fff;
 }
 .width100P{
+  width: 100%;
+}
+.form-control.width100P{
   width: 100%;
 }
 .add-btn .btn.btn-info, .add-btn .btn.btn-info:hover,.add-btn .btn.btn-info:focus, .add-btn .btn.btn-infog:active, .add-btn .btn.btn-info:visited{
   background-color: #6c7ae0;
   border-color: #6c7ae0;
 }
-.limiter .select-entities{
+.limiter .select-entities, .limiter .select-entities:focus{
   padding: 10px 15px;
   border-radius: 4px;
-  background-color: #e03e9c;
-  border: 1px solid #e03e9c;
+  background-color: transparent;
+  border: 1px solid #fb9fd4;
+  color: #ee7bbd;
+  outline: none;
+}
+.input-padd-l input{
+  padding-left: 50px;
+}
+.user-btn, .user-btn:hover, .user-btn:focus, .user-btn:active, .user-btn:visited{
+  padding: 10px 40px;
+  background-color: #6c7ae0;
+  border-color: #6c7ae0;
   color: #fff;
+}
+.user-width{
+  width: 50%;
+  margin: 0 auto;
+}
+.form-group.mx-sm-3.mb-2.ml-0{
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+}
+.pagetitle{
+  color:#4c59b4 ;
+  font-weight: bold;
+}
+.page-title-styles{
+  border-bottom: 1px dotted #4c59b4;
+  padding-bottom: 15px;
+}
+.pull-right{
+  float: right;
+}
+.pull-left{
+  float: left;
+}
+.clear{
+  clear: both;
+}
+.save-btn-style{
+  padding: 10px 50px;
+}
+.marg0{
+  margin: 0px 
+}
+.add-itentity-btn, .add-itentity-btn:hover,  .add-itentity-btn:focus,  .add-itentity-btn:active{
+  background-color: #6c7ae0;
+  border: 1px solid #6c7ae0;
 }
