@@ -478,7 +478,7 @@ a:hover{
   cursor: pointer;
 }
 .column100.column1 a{
-  color: #6c7ae0;
+  color: #209cb8;
   font-size: 14px;
   font-weight: bold;
 }
@@ -622,7 +622,7 @@ iframe {
 
 .container-table100 {
   width: 100%;
-  background: #fff7fc;
+  background: #f7fdff;
 
   display: -webkit-box;
   display: -webkit-flex;
@@ -705,11 +705,11 @@ th, td {
 }
 
 .table100.ver3 .hov-column-head-ver3 {
-  background-color: #7b88e3 !important;
+  background-color: #209cb8 !important;
 }
 
 .table100.ver3 .row100 td:hover {
-  background-color: #00d57d  !important;
+  background-color: #7fcaab  !important;
   color: #fff;
 }
 .width100P{
@@ -735,8 +735,8 @@ th, td {
 }
 .user-btn, .user-btn:hover, .user-btn:focus, .user-btn:active, .user-btn:visited{
   padding: 10px 40px;
-  background-color: #6c7ae0;
-  border-color: #6c7ae0;
+  background-color: #209cb8;
+  border-color: #209cb8;
   color: #fff;
 }
 .user-width{
@@ -771,8 +771,8 @@ th, td {
   margin: 0px 
 }
 .add-itentity-btn, .add-itentity-btn:hover,  .add-itentity-btn:focus,  .add-itentity-btn:active{
-  background-color: #6c7ae0;
-  border: 1px solid #6c7ae0;
+  background-color: #209cb8;
+  border: 1px solid #209cb8;
 }
 .margB0{
   margin-bottom: 0px;
@@ -795,8 +795,8 @@ th, td {
 .upload-btn-table input, .upload-btn-table input:hover, .upload-btn-table input:focus, .upload-btn-table input:active{
   border-radius: 28px;
   padding: 6px 21px;
-  border: 2px solid #6c7ae0;
-  color:#6c7ae0 ;
+  border: 2px solid #209cb8;
+  color:#209cb8 ;
   font-size: 14px;
     font-weight: bold;
     outline: none;
@@ -808,7 +808,7 @@ th, td {
     font-size: 14px;
 }
 .show-json-btn, .show-json-btn:hover, .show-json-btn:focus, .show-json-btn:active, .show-json-btn:visited{
-  background-color: #6c7ae0;
+  background-color: #209cb8;
     padding: 10px 20px;
     font-size: 14px;
     border-radius: 4px;
@@ -823,20 +823,20 @@ th, td {
     padding-right: 10px;
 }
 .add-btn-details, .add-btn-details:hover, .add-btn-details:focus, .add-btn-details:active, .add-btn-details:visited{
-  background-color: #6c7ae0;
+  background-color: #209cb8;
   padding: 8px 12px;
   border: 0px;
 }
 .save-btn-intity, .save-btn-intity:hover, .save-btn-intity:focus, .save-btn-intity:active{
   padding: 10px 60px;
   border-radius: 30px;
-  color: #6c7ae0;
+  color: #209cb8;
   background-color: transparent;
-  border: 2px solid #6c7ae0;
+  border: 2px solid #209cb8;
   font-weight: bold;
 }
 .add-t-btn, .add-t-btn:hover, .add-t-btn:focus, .add-t-btn:active, .add-t-btn:visited {
-  background-color: #6c7ae0;
-  border: 2px solid #6c7ae0;
+  background-color: #209cb8;
+  border: 2px solid #209cb8;
   color: #fff;
 }
