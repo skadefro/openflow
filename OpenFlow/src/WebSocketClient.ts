@@ -39,9 +39,11 @@ export class WebSocketClient {
     private _sendQueue: SocketMessage[];
     public messageQueue: IHashTable<QueuedMessage> = {};
     public remoteip: string;
+    public clientagent: string;
+    public clientversion: string;
 
     user: User;
-    private consumers: amqp_consumer[] = [];
+    public consumers: amqp_consumer[] = [];
     constructor(logger: winston.Logger, socketObject: WebSocket) {
         this._logger = logger;
         this._socketObject = socketObject;

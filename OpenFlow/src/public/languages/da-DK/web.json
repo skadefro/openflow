@@ -74,5 +74,15 @@
     "project": "Projekt",
     "helloworld": "Hej verden",
     "embedsignout": "Embed Signout",
-    "hdrobots": "HD Robots"
+    "files": "Filer",
+    "showall": "Vis alle",
+    "hdrobots": "HD Robots",
+    "robots": "Robotter",
+    "heartbeat": "Puls",
+    "auditlogs": "revisions log",
+    "impostorname": "Imposter",
+    "clientagent": "Agent",
+    "clientversion": "Version",
+    "lastclientagent": "Agent",
+    "lastclientversion": "Version"
 }

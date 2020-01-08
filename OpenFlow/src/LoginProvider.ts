@@ -236,7 +236,8 @@ export class LoginProvider {
                 auto_create_personal_nodered_group: Config.auto_create_personal_nodered_group,
                 namespace: Config.namespace,
                 nodered_domain_schema: Config.nodered_domain_schema,
-                websocket_package_size: Config.websocket_package_size
+                websocket_package_size: Config.websocket_package_size,
+                version: Config.version
             }
             res.end(JSON.stringify(res2));
         });
@@ -556,11 +557,11 @@ export class LoginProvider {
                         await admins.Save(TokenUser.rootToken())
                     } else {
                         if (!(await user.ValidatePassword(password))) {
-                            Audit.LoginFailed(username, "weblogin", "local", "");
+                            Audit.LoginFailed(username, "weblogin", "local", "", "browser", "unknown");
                             return done(null, false);
                         }
                     }
-                    Audit.LoginSuccess(new TokenUser(user), "weblogin", "local", "");
+                    Audit.LoginSuccess(new TokenUser(user), "weblogin", "local", "", "browser", "unknown");
                     var provider: Provider = new Provider(); provider.provider = "local"; provider.name = "Local";
                     provider = await Config.db.InsertOne(provider, "config", 0, false, TokenUser.rootToken());
                     LoginProvider.login_providers.push(provider);
@@ -575,12 +576,12 @@ export class LoginProvider {
                     user = await User.ensureUser(TokenUser.rootToken(), username, username, null, password);
                 } else {
                     if (!(await user.ValidatePassword(password))) {
-                        Audit.LoginFailed(username, "weblogin", "local", "");
+                        Audit.LoginFailed(username, "weblogin", "local", "", "browser", "unknown");
                         return done(null, false);
                     }
                 }
                 tuser = new TokenUser(user);
-                Audit.LoginSuccess(tuser, "weblogin", "local", "");
+                Audit.LoginSuccess(tuser, "weblogin", "local", "", "browser", "unknown");
                 return done(null, tuser);
             } catch (error) {
                 done(error);
@@ -650,8 +651,6 @@ export class LoginProvider {
         return strategy;
     }
     static async samlverify(profile: any, done: IVerifyFunction): Promise<void> {
-        console.log("samlverify");
-        console.log(JSON.stringify(profile));
         var username: string = (profile.nameID || profile.username);
         if (username !== null && username != undefined) { username = username.toLowerCase(); }
         this._logger.debug("verify: " + username);
@@ -703,12 +702,12 @@ export class LoginProvider {
         }
 
         if (Util.IsNullUndefinded(_user)) {
-            Audit.LoginFailed(username, "weblogin", "saml", "");
+            Audit.LoginFailed(username, "weblogin", "saml", "", "samlverify", "unknown");
             done("unknown user " + username, null); return;
         }
 
         var tuser: TokenUser = new TokenUser(_user);
-        Audit.LoginSuccess(tuser, "weblogin", "saml", "");
+        Audit.LoginSuccess(tuser, "weblogin", "saml", "", "samlverify", "unknown");
         done(null, tuser);
     }
     static async googleverify(token: string, tokenSecret: string, profile: any, done: IVerifyFunction): Promise<void> {
@@ -724,8 +723,6 @@ export class LoginProvider {
             var createUser: boolean = Config.auto_create_users;
             if (Config.auto_create_domains.map(x => username.endsWith(x)).length == -1) { createUser = false; }
             if (createUser) {
-                console.log("createUser");
-                console.log(JSON.stringify(profile));
                 var jwt: string = TokenUser.rootToken();
                 _user = new User(); _user.name = profile.name;
                 if (!Util.IsNullEmpty(profile.displayName)) { _user.name = profile.displayName; }
@@ -737,11 +734,11 @@ export class LoginProvider {
             }
         }
         if (Util.IsNullUndefinded(_user)) {
-            Audit.LoginFailed(username, "weblogin", "google", "");
+            Audit.LoginFailed(username, "weblogin", "google", "", "googleverify", "unknown");
             done("unknown user " + username, null); return;
         }
         var tuser: TokenUser = new TokenUser(_user);
-        Audit.LoginSuccess(tuser, "weblogin", "google", "");
+        Audit.LoginSuccess(tuser, "weblogin", "google", "", "googleverify", "unknown");
         done(null, tuser);
     }
 

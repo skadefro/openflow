@@ -74,5 +74,15 @@
     "project": "Project",
     "helloworld": "Hello world",
     "embedsignout": "Embed Signout",
-    "hdrobots": "HD Robots"
+    "files": "Files",
+    "showall": "Show all",
+    "hdrobots": "HD Robots",
+    "robots": "Robots",
+    "heartbeat": "Heartbeat",
+    "auditlogs": "Audit log",
+    "impostorname": "Imposter",
+    "clientagent": "Agent",
+    "clientversion": "Version",
+    "lastclientagent": "Agent",
+    "lastclientversion": "Version"
 }

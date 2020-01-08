@@ -106,10 +106,10 @@ export class DatabaseConnection {
                     if (Config.update_acl_based_on_groups == true) {
                         if (multi_tenant_skip.indexOf(item._id) > -1) {
                             if (ace._id != WellknownIds.admins && ace._id != WellknownIds.root) {
-                                item.removeRight(ace._id, [Rights.read]);
+                                // item.removeRight(ace._id, [Rights.read]);
                             }
                         } else {
-                            item.addRight(ace._id, ace.name, [Rights.read]);
+                            // item.addRight(ace._id, ace.name, [Rights.read]);
                         }
                     }
                     var exists = item.members.filter(x => x._id == ace._id);
@@ -124,29 +124,29 @@ export class DatabaseConnection {
                             ace.name = arr[0].name;
                             if (Config.multi_tenant && multi_tenant_skip.indexOf(item._id) > -1) {
                                 // when multi tenant don't allow members of common user groups to see each other
-                                console.log("Running in multi tenant mode, skip adding permissions for " + item.name);
+                                this._logger.info("Running in multi tenant mode, skip adding permissions for " + item.name);
                             } else if (arr[0]._type == "user") {
                                 var u: User = User.assign(arr[0]);
                                 if (!u.hasRight(item._id, Rights.read)) {
-                                    console.log("Assigning " + item.name + " read permission to " + u.name);
+                                    this._logger.debug("Assigning " + item.name + " read permission to " + u.name);
                                     u.addRight(item._id, item.name, [Rights.read], false);
 
                                     await this.db.collection("users").updateOne({ _id: u._id }, { $set: { _acl: u._acl } });
                                     // await this.db.collection("users").save(u);
                                 } else if (u._id != item._id) {
-                                    console.log(item.name + " allready exists on " + u.name);
+                                    this._logger.debug(item.name + " allready exists on " + u.name);
                                 }
                             } else if (arr[0]._type == "role") {
                                 var r: Role = Role.assign(arr[0]);
                                 if (r._id == WellknownIds.admins || r._id == WellknownIds.users) {
                                 }
                                 if (!r.hasRight(item._id, Rights.read)) {
-                                    console.log("Assigning " + item.name + " read permission to " + r.name);
+                                    this._logger.debug("Assigning " + item.name + " read permission to " + r.name);
                                     r.addRight(item._id, item.name, [Rights.read], false);
                                     await this.db.collection("users").updateOne({ _id: r._id }, { $set: { _acl: r._acl } });
                                     // await this.db.collection("users").save(r);
                                 } else if (r._id != item._id) {
-                                    console.log(item.name + " allready exists on " + r.name);
+                                    this._logger.debug(item.name + " allready exists on " + r.name);
                                 }
 
                             }
@@ -161,33 +161,54 @@ export class DatabaseConnection {
                 var ace = removed[i];
 
                 if (ace._id != WellknownIds.admins && ace._id != WellknownIds.root) {
-                    item.removeRight(ace._id, [Rights.read]);
+                    // if (item.hasRight(ace._id, Rights.read)) {
+                    //     item.removeRight(ace._id, [Rights.read]);
+                    //     var right = item.getRight(ace._id, false);
+                    //     // read was not the only right ? then re add
+                    //     if (right != null) {
+                    //         item.addRight(ace._id, ace.name, [Rights.read]);
+                    //     }
+                    // }
+
                 }
 
                 var arr = await this.db.collection("users").find({ _id: ace._id }).project({ name: 1, _acl: 1, _type: 1 }).limit(1).toArray();
                 if (arr.length == 1 && item._id != WellknownIds.admins && item._id != WellknownIds.root) {
                     if (Config.multi_tenant && multi_tenant_skip.indexOf(item._id) > -1) {
                         // when multi tenant don't allow members of common user groups to see each other
-                        console.log("Running in multi tenant mode, skip removing permissions for " + item.name);
+                        this._logger.info("Running in multi tenant mode, skip removing permissions for " + item.name);
                     } else if (arr[0]._type == "user") {
                         var u: User = User.assign(arr[0]);
                         if (u.hasRight(item._id, Rights.read)) {
-                            console.log("Removing " + item.name + " read permissions from " + u.name);
                             u.removeRight(item._id, [Rights.read]);
-                            // await this.db.collection("users").save(u);
-                            await this.db.collection("users").updateOne({ _id: u._id }, { $set: { _acl: u._acl } });
+
+                            // was read the only right ? then remove it
+                            var right = u.getRight(item._id, false);
+                            if (right == null) {
+                                this._logger.debug("Removing " + item.name + " read permissions from " + u.name);
+                                // await this.db.collection("users").save(u);
+                                await this.db.collection("users").updateOne({ _id: u._id }, { $set: { _acl: u._acl } });
+
+                            }
+
                         } else {
-                            console.log("No need to remove " + item.name + " read permissions from " + u.name);
+                            this._logger.debug("No need to remove " + item.name + " read permissions from " + u.name);
                         }
                     } else if (arr[0]._type == "role") {
                         var r: Role = Role.assign(arr[0]);
                         if (r.hasRight(item._id, Rights.read)) {
-                            console.log("Removing " + item.name + " read permissions from " + r.name);
                             r.removeRight(item._id, [Rights.read]);
-                            // await this.db.collection("users").save(r);
-                            await this.db.collection("users").updateOne({ _id: r._id }, { $set: { _acl: r._acl } });
+
+                            // was read the only right ? then remove it
+                            var right = r.getRight(item._id, false);
+                            if (right == null) {
+                                this._logger.debug("Removing " + item.name + " read permissions from " + r.name);
+                                // await this.db.collection("users").save(r);
+                                await this.db.collection("users").updateOne({ _id: r._id }, { $set: { _acl: r._acl } });
+                            }
+
                         } else {
-                            console.log("No need to remove " + item.name + " read permissions from " + u.name);
+                            this._logger.debug("No need to remove " + item.name + " read permissions from " + u.name);
                         }
                     }
 
@@ -479,7 +500,7 @@ export class DatabaseConnection {
             var r: Role = (item as any);
             if (r.name == null || r.name == "") { throw new Error("Name is mandatory"); }
             var exists2 = await Role.FindByName(r.name);
-            if (exists2 != null) { throw new Error("Access denied"); }
+            if (exists2 != null) { throw new Error("Access denied, adding new user"); }
         }
 
         // var options:CollectionInsertOneOptions = { writeConcern: { w: parseInt((w as any)), j: j } };
@@ -490,7 +511,7 @@ export class DatabaseConnection {
         if (collectionname === "users" && item._type === "user") {
             var users: Role = await Role.FindByNameOrId("users", jwt);
             users.AddMember(item);
-            await users.Save(jwt);
+            await users.Save(TokenUser.rootToken());
         }
         if (collectionname === "users" && item._type === "role") {
             item.addRight(item._id, item.name, [Rights.read]);
