@@ -389,7 +389,7 @@ a:hover{
   padding: 10px 0px 0px 25px;
 }
 .headerbg{
-  background-color: #6c7ae0;
+  background-color: #209cb8;
 }
 @media (max-width:770px) and (min-width:400px) {
   .btn-google{
@@ -497,7 +497,7 @@ a:hover{
 }
 .page-header{
   font-weight: bold;
-  color: #6c7ae0;
+  color: #209cb8;
 }
 .table.table-striped .thead-dark th{
     background-color: #00576f;
@@ -589,7 +589,7 @@ body {
   -webkit-box-shadow: 0px 1px 16px -6px rgba(0,149,255,0.66);
 -moz-box-shadow: 0px 1px 16px -6px rgba(0,149,255,0.66);
 box-shadow: 0px 1px 16px -6px rgba(0,149,255,0.66);
-background: linear-gradient(-68deg, #ff9efb , #4f4cff)
+background: linear-gradient(-68deg, #fff3ff , #00abb4)
 }
 .openflow-page .input-group-addon.flow-search  .fa-search, .entiries-page .input-group-addon.flow-search  .fa-search{
   color: #fff;
@@ -693,7 +693,7 @@ th, td {
   line-height: 1.4;
   text-transform: uppercase;
 
-  background-color: #6c7ae0;
+  background-color: #00abb4;
 }
 
 .table100.ver3 .row100:hover td {
@@ -709,7 +709,7 @@ th, td {
 }
 
 .table100.ver3 .row100 td:hover {
-  background-color: #ffa8da !important;
+  background-color: #00d57d  !important;
   color: #fff;
 }
 .width100P{
@@ -719,15 +719,15 @@ th, td {
   width: 100%;
 }
 .add-btn .btn.btn-info, .add-btn .btn.btn-info:hover,.add-btn .btn.btn-info:focus, .add-btn .btn.btn-infog:active, .add-btn .btn.btn-info:visited{
-  background-color: #6c7ae0;
-  border-color: #6c7ae0;
+  background-color: #209cb8;
+  border-color: #209cb8;
 }
 .limiter .select-entities, .limiter .select-entities:focus{
   padding: 10px 15px;
   border-radius: 4px;
   background-color: transparent;
-  border: 1px solid #fb9fd4;
-  color: #ee7bbd;
+  border: 1px solid #04ce546b;
+  color: #00b046;
   outline: none;
 }
 .input-padd-l input{
