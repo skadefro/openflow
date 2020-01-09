@@ -1,51 +1,65 @@
-<div class="row">
-  <h1 translate lib="web">auditlogs</h1>
-  <p class="col-md-5 lead"></p>
-  <div class="form-group col-sm-3 form-horizontal">
-    <label class="sr-only">Filter</label>
+<div class="row pt-4 entiries-page pb-3">
+  <div class="pt-4 col-sm-8 ">
+    <h3 class="page-header" translate lib="web">auditlogs</h3>
+  <p  class="col-md-5 lead"></p>
+  </div>
+  <div class="pt-4 form-group col-sm-4 form-horizontal">
     <div class="input-group unframed-addons">
-      <div class="input-group-addon"><i class="fas fa-search"></i></div>
-      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md"
+      <label class="sr-only">Filter</label>
+      <div  class="input-group-addon flow-search ">
+        <i class="fas fa-search"></i></div>
+      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md rel-posi search-input"
         ng-model-options="{debounce: 400}" />
     </div>
   </div>
 </div>
-<table id="table1" class="table table-striped" when-scrolled="ctrl.more()" style="width: 100%;">
-  <thead class="thead-dark">
-    <tr>
-      <th></th>
-      <th ng-click="ctrl.ToggleOrder('name')"><b translate lib="web">name</b></th>
-      <th ng-click="ctrl.ToggleOrder('_type')"><b translate lib="web">type</b></th>
-      <th ng-click="ctrl.ToggleOrder('impostorname')"><b translate lib="web">impostorname</b></th>
-      <th ng-click="ctrl.ToggleOrder('clientagent')"><b translate lib="web">clientagent</b></th>
-      <th ng-click="ctrl.ToggleOrder('clientversion')"><b translate lib="web">clientversion</b></th>
-      <th scope="col" ng-click="ctrl.ToggleOrder('_created')"><b translate lib="web">created</b></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="model in ctrl.models">
-      <td>
-        <!-- <i class="fas fa-robot" ng-show="model.clientagent=='openrpa'"></i>
-        <i class="fas fa-globe" ng-show="model.clientagent=='webapp' || model.clientagent=='browser'"></i>
-        <i class="fas fa-mobile-alt" ng-show="model.clientagent=='mobileapp'"></i>
-        <i class="fab fa-node-js" ng-show="model.clientagent=='nodered' || model.clientagent=='getUserFromRequest'"></i>
-        <i class="fab fa-google" ng-show="model.clientagent=='googleverify'"></i>
-        <i class="fab fa-windows" ng-show="model.clientagent=='samlverify'"></i>
-        <i class="far fa-question-circle" ng-show="model.clientagent=='' || model.clientagent==null"></i>
 
-        <i class="fas fa-user-secret" ng-show="model.impostorname!='' && model.impostorname!=null"> -->
-        <i ng-class="model.fa">
-          <i ng-class="model.fa2">
 
-      </td>
-      <td>{{model.name}}</td>
-      <td>{{model._type}}</td>
-      <td>{{model.impostorname}}</td>
-      <td>{{model.clientagent}}</td>
-      <td>{{model.clientversion}}</td>
-      <td>
+
+
+<div class="limiter">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100 ver3 m-b-110">
+        <table data-vertable="ver3" id="table1" class="table table-striped" when-scrolled="ctrl.more()">
+          <thead>
+            <tr class="row100 head">
+              <th class="column100 column1" data-column="column1" scope="col"></th>
+              <th class="column100 column1" data-column="column1" scope="col" ng-click="ctrl.ToggleOrder('name')"><b translate lib="web">name</b></th>
+              <th class="column100 column1" data-column="column1" scope="col"  ng-click="ctrl.ToggleOrder('_type')"><b translate lib="web">type</b></th>
+              <th class="column100 column1" data-column="column1" scope="col" ng-click="ctrl.ToggleOrder('impostorname')"><b translate lib="web">impostorname</b></th>
+              <th class="column100 column1" data-column="column1" scope="col"  ng-click="ctrl.ToggleOrder('clientagent')"><b translate lib="web">clientagent</b></th>
+              <th class="column100 column1" data-column="column1" scope="col"  ng-click="ctrl.ToggleOrder('clientversion')"><b translate lib="web">clientversion</b></th>
+              
+              <th class="column100 column1" data-column="column1" scope="col"  ng-click="ctrl.ToggleOrder('_created')"><b translate lib="web">created</b></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  class="row100"  ng-repeat="model in ctrl.models">
+              <td class="column100 column1"> <i ng-class="model.fa">
+          <i ng-class="model.fa2"></td>
+              <td class="column100 column1">{{model.name}}</td>
+
+              <td class="column100 column1">{{model._type}}</td>
+              <td class="column100 column1">
+                {{model.impostorname}}
+              </td>
+              <td class="column100 column1">
+                {model.clientagent}}
+              </td>
+              <td class="column100 column1">
+               {{model.clientversion}}
+              </td>
+              <td class="column100 column1">
         <timesince ng-model="model._created" />
-      </td>
-    </tr>
-  </tbody>
-</table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

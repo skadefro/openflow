@@ -1,41 +1,74 @@
-<div class="row">
-  <h1 translate lib="web">jslog</h1>
-  <p class="col-md-5 lead"></p>
-  <div class="form-group col-sm-3 form-horizontal">
-    <label class="sr-only">Filter</label>
+<div class="row pt-4 entiries-page pb-3">
+  <div class="pt-4 col-sm-8 ">
+    <h3 class="page-header" translate lib="web">jslog</h3>
+  <p  class="col-md-5 lead"></p>
+  </div>
+ 
+
+
+  <div class="pt-4 form-group col-sm-4 form-horizontal">
+     
     <div class="input-group unframed-addons">
-      <div class="input-group-addon"><i class="fas fa-search"></i></div>
-      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md"
+      <label class="sr-only">Filter</label>
+      <div  class="input-group-addon flow-search ">
+        <i class="fas fa-search"></i></div>
+      <input ng-model="ctrl.searchstring" ng-change="ctrl.Search()" class="form-control input-md rel-posi search-input"
         ng-model-options="{debounce: 400}" />
     </div>
   </div>
 </div>
-<button type="button" ng-click="ctrl.loadData()" ng-disabled="ctrl.loading" translate lib="web">reload</button>
-<button type="button" ng-click="ctrl.DeleteMany()" ng-disabled="ctrl.loading" translate lib="web">empty</button>
-<div class="row">
-  <table id="table1" class="table table-striped" when-scrolled="ctrl.more()" style="width: 100%;">
-    <thead class="thead-dark">
-      <tr>
-        <th ng-click="ctrl.ToggleOrder('_type')"><b translate lib="web">type</b></th>
-        <th ng-click="ctrl.ToggleOrder('_createdby')"><b translate lib="web">createdby</b></th>
-        <th ng-click="ctrl.ToggleOrder('host')"><b translate lib="web">host</b></th>
-        <th ng-click="ctrl.ToggleOrder('_created')"><b translate lib="web">created</b></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="model in ctrl.models">
-        <td>{{model._type}}</td>
-        <td>{{model._createdby}}</td>
-        <td>{{model.host}}</td>
-        <td>
+
+
+
+
+
+<div class="limiter">
+  <div class="container-table100">
+    <div class="row width100P">
+      <div class="col-md-6 add-btn">
+          <a type="button"  class="btn btn-info white-color" ng-click="ctrl.loadData()" ng-disabled="ctrl.loading" translate lib="web">reload</a>
+      </div>
+      <div class=" col-md-6 text-right add-btn">
+          <button  class="btn btn-info" type="button" ng-click="ctrl.DeleteMany()" ng-disabled="ctrl.loading" translate lib="web">empty</button>
+      </div>
+     
+    </div>
+    <div class="wrap-table100">
+      <div class="table100 ver3 m-b-110">
+        <table data-vertable="ver3" id="table1" class="table table-striped" when-scrolled="ctrl.more()">
+          <thead>
+            <tr class="row100 head">
+              <th class="column100 column1" data-column="column1" scope="col"  ng-click="ctrl.ToggleOrder('_type')"><b translate lib="web">type</b></th>
+              <th class="column100 column1" data-column="column1" scope="col"  ng-click="ctrl.ToggleOrder('_createdby')"><b translate lib="web">createdby</b></th>
+              <th class="column100 column1" data-column="column1" scope="col"  ng-click="ctrl.ToggleOrder('host')"><b translate lib="web">host</b></th>
+              <th class="column100 column1" data-column="column1" scope="col"  ng-click="ctrl.ToggleOrder('_created')"><b translate lib="web">created</b></th>
+              <th class="column100 column1" data-column="column1" scope="col" >
+                </th>
+                <th class="column100 column1" data-column="column1" scope="col" >
+                </th>
+                <th class="column100 column1" data-column="column1" scope="col" >
+                </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  class="row100"  ng-repeat="model in ctrl.models">
+              <td class="column100 column1">{{model._type}}</td>
+              <td class="column100 column1">{{model._createdby}}</td>
+              <td class="column100 column1">{{model.host}}</td>
+              <td class="column100 column1">
           <timesince ng-model="model._created" />
-        </td>
-        <td class="btn-cell">
-          {{model.message}}
-        </td>
+              </td>
+              <td class="column100 column1">
+                {{model.message}}
+              </td>
+              <td class="column100 column1">
         <td>{{(model.initiator.length > 100) ? model.initiator.substr(0, 100 - 1) : model.initiator }}</td>
-      </tr>
-    </tbody>
-  </table>
+              </td>
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

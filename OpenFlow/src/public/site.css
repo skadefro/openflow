@@ -589,7 +589,7 @@ body {
   -webkit-box-shadow: 0px 1px 16px -6px rgba(0,149,255,0.66);
 -moz-box-shadow: 0px 1px 16px -6px rgba(0,149,255,0.66);
 box-shadow: 0px 1px 16px -6px rgba(0,149,255,0.66);
-background: linear-gradient(-68deg, #fff3ff , #00abb4)
+background: linear-gradient(-68deg, #77d888 , #00abb4)
 }
 .openflow-page .input-group-addon.flow-search  .fa-search, .entiries-page .input-group-addon.flow-search  .fa-search{
   color: #fff;
@@ -709,7 +709,7 @@ th, td {
 }
 
 .table100.ver3 .row100 td:hover {
-  background-color: #7fcaab  !important;
+  background-color: #61c199  !important;
   color: #fff;
 }
 .width100P{
@@ -839,4 +839,73 @@ th, td {
   background-color: #209cb8;
   border: 2px solid #209cb8;
   color: #fff;
+}
+
+
+.container1 .checkmark:after {
+  left: 9px;
+  top: 3px;
+    width: 7px;
+    height: 14px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.container1 input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container1 {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container1 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #a1c1c2;
+}
+
+/* On mouse-over, add a grey background color */
+.container1:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container1 input:checked ~ .checkmark {
+  background-color: #02a4b5;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.white-color{
+  color: #fff !important;
 }
