@@ -751,11 +751,11 @@ th, td {
   padding-left: 0px !important;
 }
 .pagetitle{
-  color:#4c59b4 ;
+  color:#005b90 ;
   font-weight: bold;
 }
 .page-title-styles{
-  border-bottom: 1px dotted #4c59b4;
+  border-bottom: 1px dotted #005b90;
   padding-bottom: 15px;
 }
 .pull-right{
@@ -829,6 +829,7 @@ th, td {
   background-color: #209cb8;
   padding: 8px 12px;
   border: 0px;
+  color: #fff !important;
 }
 .save-btn-intity, .save-btn-intity:hover, .save-btn-intity:focus, .save-btn-intity:active{
   padding: 10px 60px;
