@@ -662,13 +662,13 @@ th, td {
 }
 
 .row100.head th {
-  padding-top: 24px;
-  padding-bottom: 20px;
+  padding-top: 16px;
+  padding-bottom: 15px;
 }
 
 .row100 td {
-  padding-top: 18px;
-  padding-bottom: 14px;
+  padding-top: 15px;
+  padding-bottom: 10px;
 }
 .table100{
   margin-top: 30px;
@@ -709,14 +709,17 @@ th, td {
 }
 
 .table100.ver3 .row100 td:hover {
-  background-color: #61c199  !important;
-  color: #fff;
+  background-color: #c5c5c5  !important;
+  color: #000;
 }
 .width100P{
   width: 100%;
 }
 .form-control.width100P{
   width: 100%;
+}
+.marg0Auto{
+  margin: 0 auto;
 }
 .add-btn .btn.btn-info, .add-btn .btn.btn-info:hover,.add-btn .btn.btn-info:focus, .add-btn .btn.btn-infog:active, .add-btn .btn.btn-info:visited{
   background-color: #209cb8;
@@ -909,3 +912,7 @@ th, td {
 .white-color{
   color: #fff !important;
 }
+
+
+
+
