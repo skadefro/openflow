@@ -4,12 +4,12 @@
     }
 </style>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'> -->
-<section>
+<section class="pt-4">
     <div class="form-inline">
         <label for="sid" class="col-sm-2 control-label" translate lib="web">name</label>
         <div class="col-sm-4">
             <input ng-model="ctrl.model.name" class="form-control input-md" ng-disabled="ctrl.loading==true" />
-            <button ng-click="ctrl.Save()" type="button" ng-disabled="ctrl.loading==true" class="btn btn-success "
+            <button ng-click="ctrl.Save()" type="button" ng-disabled="ctrl.loading==true" class="btn btn-success add-btn-details"
                 translate lib="web">save</button>
         </div>
     </div>
