@@ -138,7 +138,11 @@ async function initDatabase(): Promise<boolean> {
         }
         await filestore_users.Save(jwt);
 
-
+        var process_mining_data: Role = await User.ensureRole(jwt, "process mining data", WellknownIds.process_mining_data);
+        process_mining_data.AddMember(admins);
+        process_mining_data.addRight(WellknownIds.admins, "admins", [Rights.full_control]);
+        process_mining_data.removeRight(WellknownIds.admins, [Rights.delete]);
+        await process_mining_data.Save(jwt);
 
         // Temp hack to update all existing users and roles
         // var _users = await Config.db.query<Role>({ $or: [{ _type: "user" }, { _type: "role" }] }, null, 1000, 0, null, "users", jwt);

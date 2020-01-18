@@ -17,6 +17,9 @@ export class WellknownIds {
 
     static personal_nodered_users: string = "5a23f18a2e8987292ddbe062";
 
+    static process_mining_data: string = "5e22f9bfffaf1a05a5e6ced3";
+
+
 }
 export class Rights {
     static create = 1;
