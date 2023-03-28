@@ -8,7 +8,12 @@
     "coverage": "nyc ./node_modules/.bin/_mocha 'test/**/*.test.ts'",
     "oldtest": "ts-mocha --paths -p OpenFlow/tsconfig.json OpenFlow/**/*.spec.ts",
     "rebuild": "docker-compose up registry -d && docker-compose build && docker-compose push --ignore-push-failures  && docker-compose up -d",
-    "build": "docker-compose up registry -d && docker-compose push --ignore-push-failures  && docker-compose up -d"
+    "build": "docker-compose up registry -d && docker-compose push --ignore-push-failures  && docker-compose up -d",
+    "watch": "gulp watch",
+    "compose": "gulp compose",
+    "latest": "gulp latest",
+    "sass": "gulp sass",
+    "bump": "gulp bump"
   },
   "repository": {
     "type": "git",
