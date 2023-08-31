@@ -25,10 +25,12 @@ const NodeREDHTMLFiles = ["./OpenFlowNodeRED/src/nodered/nodes/**/*.html", "./Op
 const publicdestination = "./dist/public";
 const mapfile = path.join(__dirname, publicdestination, 'bundle.js.map')
 let version = "0.0.1";
-if (fs.existsSync("../VERSION")) {
-    version = fs.readFileSync("../VERSION", "utf8");
-} else if (fs.existsSync("VERSION")) {
-    version = fs.readFileSync("VERSION", "utf8");
+if (fs.existsSync("../package.json")) {
+    var p = require("../package.json");
+    version = p.version;    
+} else if (fs.existsSync("package.json")) {
+    var p = require("./package.json");
+    version = p.version;    
 }
 gulp.task("copyfiles1", function () {
     console.log("copyfiles1")
