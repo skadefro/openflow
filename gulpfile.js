@@ -35,7 +35,6 @@ if (fs.existsSync("../package.json")) {
 gulp.task("copyfiles1", function () {
     console.log("copyfiles1")
     const openflow = gulp.src(OpenFlowPublicFiles).pipe(gulp.dest(publicdestination));
-    const version1 = gulp.src('./VERSION').pipe(gulp.dest("./dist"));
 
     const copyspurce = gulp.src('./OpenFlow/src/public/**/*.ts').pipe(gulp.dest(publicdestination + '/OpenFlow/src/public'));
     const copyproto = gulp.src('./proto/**/*.*').pipe(gulp.dest('./dist/proto/proto'));
@@ -47,15 +46,15 @@ gulp.task("setwatch", async function () {
 });
 gulp.task("dowatch", function () {
     console.log("watch")
-    return gulp.watch(NodeREDHTMLFiles.concat(OpenFlowPublicFiles).
-        concat('./VERSION').concat('./OpenFlow/src/public/**/*.ts')
+    return gulp.watch(NodeREDHTMLFiles.concat(OpenFlowPublicFiles)
+        .concat('./OpenFlow/src/public/**/*.ts')
         .concat('./OpenFlow/src/proto/**/*.*')
         , gulp.series("browserify", "copyfiles1"));
 });
 gulp.task("filewatch", function () {
     console.log("watch")
-    return gulp.watch(NodeREDHTMLFiles.concat(OpenFlowPublicFiles).
-        concat('./VERSION').concat('./OpenFlow/src/public/**/*.ts')
+    return gulp.watch(NodeREDHTMLFiles.concat(OpenFlowPublicFiles)
+        .concat('./OpenFlow/src/public/**/*.ts')
         .concat('./OpenFlow/src/proto/**/*.*')
         , gulp.series( "copyfiles1"));
 });
