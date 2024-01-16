@@ -545,7 +545,7 @@ export class amqpwrapper extends events.EventEmitter {
             if(exchange != "openflow" && exchange != "openflow_logs") {
                 // console.log("publishing to exchange: " + exchange + " routingkey: " + routingkey + " correlationId: " + correlationId);
             }
-            await this.PreRegisterExchange(exchange, span)
+            // await this.PreRegisterExchange(exchange, span)
             this.channel.publish(exchange, routingkey, Buffer.from(data), options);
         }
     }
@@ -596,7 +596,7 @@ export class amqpwrapper extends events.EventEmitter {
             if(exchange != "openflow" && exchange != "openflow_logs") {
                 // console.log("publishing to exchange: " + exchange + " routingkey: " + routingkey + " correlationId: " + correlationId);
             }
-            await this.PreRegisterExchange(exchange, span)
+            // await this.PreRegisterExchange(exchange, span)
             this.channel.publish(exchange, routingkey, Buffer.from(data), options);
         }
     }
