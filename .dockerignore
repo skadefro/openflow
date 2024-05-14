@@ -2,10 +2,10 @@ node_modules
 logs
 config
 temp
+test
 letsencrypt
 .cache
 .npmrc
-.openflowapicache
 .scannerwork
 docker-package.json
 .env

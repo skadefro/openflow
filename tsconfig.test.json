@@ -1,0 +1,17 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "module": "commonjs",  // This needs to be set for Node.js compatibility
+        "experimentalDecorators": true,
+        "isolatedModules": false,
+        "typeRoots": [
+            "node_modules/@types"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "./**/*.ts"
+    ]
+}
