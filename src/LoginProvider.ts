@@ -1413,9 +1413,17 @@ export class LoginProvider {
                 Logger.instanse.debug("return PassiveLogin.html", span, {cls: "LoginProvider", func: "getlogin"});
                 const localfile = path.join(__dirname, 'public', "PassiveLogin.html");
                 const webappfile = path.join(WebServer.webapp_file_path, "PassiveLogin.html");
+                const webappfile2 = path.join(WebServer.webapp_file_path, "client/PassiveLogin.html");
+                const webappfile3 = path.join(WebServer.webapp_file_path, "client/ui/PassiveLogin.html");
                 if(fs.existsSync(webappfile)) {
                     console.log("serve webapp " + webappfile);
                     res.sendFile(webappfile);
+                } else if(fs.existsSync(webappfile2)) {
+                    console.log("serve file " + webappfile2);
+                    res.sendFile(webappfile2);
+                } else if(fs.existsSync(webappfile3)) {
+                    console.log("serve file " + webappfile3);
+                    res.sendFile(webappfile3);
                 } else if(fs.existsSync(localfile)) {
                     console.log("serve file " + localfile);
                     res.sendFile(localfile);

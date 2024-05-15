@@ -109,6 +109,37 @@ export class WebServer {
         return false;
     }
     static webapp_file_path = "";
+    static async addWebserverRoutes() {
+        this.app.get("/", (req, res) => {
+            res.status(402).redirect("/ui/")
+        });
+        if(fs.existsSync( path.join(WebServer.webapp_file_path, 'handler.js' ) )) {
+            const handler = await import(path.join(WebServer.webapp_file_path, 'handler.js'));
+
+            this.app.use((req, res, next) => {
+                if(req.url != null && req.url.startsWith("/ui")) {
+                    console.log(req.url);
+                    handler.handler(req, res, next)
+                } else {
+                    next();
+                }
+            });
+        } else {
+            this.app.use('/ui', express.static(WebServer.webapp_file_path));
+            this.app.get('/ui/*', (req, res, next) => {
+                // Only redirect to index.html if the request accepts HTML, this prevents redirection for missing assets like .js, .css, images, etc.
+                if (req.accepts('html')) {
+                    console.log("serve file " + path.join(WebServer.webapp_file_path, 'index.html') + " for " + req.originalUrl + " (" + req.url + ")");
+                    res.setHeader('Content-Type', 'text/html');
+                    res.sendFile(path.join(WebServer.webapp_file_path, 'index.html'));
+                } else {
+                    // Optionally, send a 404 for unknown types if the file is not found
+                    // res.status(404).send('Not Found');
+                    return next();
+                }
+            });
+        }
+    }
     static async configure(baseurl: string, parent: Span): Promise<http.Server> {
         const span: Span = Logger.otel.startSubSpan("WebServer.configure", parent);
         span?.addEvent("create RateLimiterMemory");
@@ -133,11 +164,11 @@ export class WebServer {
                 }
                 next();
             });
-            WebServer.webapp_file_path = path.join(__dirname, "../node_modules/@openiap/core-web/dist");
-            if(!fs.existsSync(WebServer.webapp_file_path)) {
-                WebServer.webapp_file_path = path.join(__dirname, "./public");
-            }
-
+            // WebServer.webapp_file_path = path.join(__dirname, "../node_modules/@openiap/core-web/dist");
+            // if(!fs.existsSync(WebServer.webapp_file_path)) {
+            //     WebServer.webapp_file_path = path.join(__dirname, "./public");
+            // }
+            WebServer.webapp_file_path = path.join(__dirname, "./public");
 
             this.app.use(compression());
             this.app.use(express.urlencoded({ extended: true }));
@@ -167,22 +198,7 @@ export class WebServer {
                 return res.status(200).send({ message: 'ok.' });
             });
 
-            this.app.get("/", (req, res) => {
-                res.status(402).redirect("/ui/")
-            });
-            this.app.use('/ui', express.static(WebServer.webapp_file_path));
-            this.app.get('/ui/*', (req, res, next) => {
-                // Only redirect to index.html if the request accepts HTML, this prevents redirection for missing assets like .js, .css, images, etc.
-                if (req.accepts('html')) {
-                    console.log("serve file " + path.join(WebServer.webapp_file_path, 'index.html') + " for " + req.originalUrl + " (" + req.url + ")");
-                    res.setHeader('Content-Type', 'text/html');
-                    res.sendFile(path.join(WebServer.webapp_file_path, 'index.html'));
-                } else {
-                    // Optionally, send a 404 for unknown types if the file is not found
-                    // res.status(404).send('Not Found');
-                    return next();
-                }
-            });
+
 
             // this.app.get("/", (req, res) => {
             //     res.status(402).redirect("/ui/")
@@ -331,6 +347,8 @@ export class WebServer {
 
             config.doDumpMesssages = false;
             config.DoDumpToConsole = false;
+
+            await WebServer.addWebserverRoutes();
             return WebServer.server;
         } catch (error) {
             Logger.instanse.error(error, span);
