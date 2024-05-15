@@ -118,7 +118,6 @@ export class WebServer {
 
             this.app.use((req, res, next) => {
                 if(req.url != null && req.url.startsWith("/ui")) {
-                    console.log(req.url);
                     handler.handler(req, res, next)
                 } else {
                     next();
