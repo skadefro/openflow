@@ -44,7 +44,6 @@
     "@kubernetes/client-node": "^0.19.0",
     "@node-saml/passport-saml": "^4.0.1",
     "@openiap/cloud-git-mongodb": "^1.0.6",
-    "@openiap/core-web": "github:openiap/core-web#v3",
     "@openiap/nodeapi": "^0.0.38",
     "@openiap/openflow-api": "^2.1.11",
     "@opentelemetry/exporter-metrics-otlp-grpc": "^0.43.0",
