@@ -22,6 +22,20 @@ export class Crypt {
         result.roles = [];
         return result;
     }
+    static _guestToken: string = "";
+    static _guestTokenAge: Date = new Date();
+    static guestToken(): string {
+        // let guestTokenAgeDays = (new Date().getTime() - Crypt._guestTokenAge.getTime()) / (1000 * 60 * 60 * 24);
+        // let guestTokenAgeSeconds = (new Date().getTime() - Crypt._guestTokenAge.getTime()) / 1000;
+        let guestTokenAgeMinutes = (new Date().getTime() - Crypt._guestTokenAge.getTime()) / 1000 / 60;
+        if(guestTokenAgeMinutes > 60) {
+            Crypt._guestToken = "";
+        }
+        if(Crypt._guestToken != "") return Crypt._guestToken;
+        Crypt._guestToken = Crypt.createToken(this.guestUser(), "1d");
+        return Crypt._guestToken;
+    }
+
     static _rootToken: string = "";
     static _rootTokenAge: Date = new Date();
     static rootToken(): string {

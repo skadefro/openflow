@@ -209,11 +209,12 @@ export class Message {
             this.jwt = cli.jwt;
         }
         if (NoderedUtil.IsNullEmpty(this.jwt) && jwtrequired) {
-            throw new Error("Not signed in, and missing jwt");
-            // this.Reply("error");
-            // this.data = "{\"message\": \"Not signed in, and missing jwt\", \"error\": \"Not signed in, and missing jwt\"}";
-            // cli?.Send(this);
-            // return false;
+            if(!Config.enable_guest) {
+                throw new Error("Not signed in, and missing jwt");
+            } else {
+                this.jwt = Crypt.guestToken();
+                this.tuser = Crypt.guestUser();
+            }            
         } else if (!NoderedUtil.IsNullEmpty(this.jwt)) {
             try {
                 this.tuser = await Auth.Token2User(this.jwt, null);
