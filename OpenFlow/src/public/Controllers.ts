@@ -8061,6 +8061,7 @@ export class AgentCtrl extends entityCtrl<any> {
                 this.model.runas = user._id;
                 this.model.runasname = user.name;
                 this.model.docker = true;
+                this.model.environment = {}
                 this.searchtext = user.name;
                 if (!this.$scope.$$phase) { this.$scope.$apply(); }
                 this.RunasUpdated();
@@ -8071,6 +8072,7 @@ export class AgentCtrl extends entityCtrl<any> {
     async processData(): Promise<void> {
         if (this.model.stripeprice == null) this.model.stripeprice = "";
         if ( this.model.schedules == null) this.model.schedules = [];
+        if(this.model.environment == null) this.model.environment = {}
         
         // v1.5 to 1.5.1 upgrade, hack
         if(this.model.package != null && this.model.package != ""){
@@ -8484,7 +8486,6 @@ export class AgentCtrl extends entityCtrl<any> {
                 this.errormessage = "Schedule names must be unique"
                 return;
             }
-
             if (this.model._id) {
                 await NoderedUtil.UpdateOne({ collectionname: this.collection, item: this.model });
                 if(this.instances.length == 0 && this.model.image != null && this.model.image != "") {
